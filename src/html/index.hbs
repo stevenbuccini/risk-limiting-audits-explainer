@@ -11,6 +11,10 @@
 
 
 	<script inline src='head.js'></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.dom.min.js"></script>
+
+	<script src="{{basepath}}js/sketch.js"></script>
 
 	{{> base/analytics }}
 
@@ -23,12 +27,21 @@
 	<main id='content'>
 
 		{{> story/intro }}
-		{{!-- delete guide and put your html here --}}
-		{{> base/guide }}
+		{{> base/simulation1 }}
+		<script>
+			function setup() {
+				createCanvas(400, 400);
+				line(15, 25, 70, 90);
+			}
+
+			function draw() {
+
+			}
+		</script>
 
 	</main>
 
-	
+
 
 
 	<script src='{{basepath}}assets/scripts/d3.v5.11.0.min.js'></script>
