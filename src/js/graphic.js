@@ -13,7 +13,7 @@ function init() {
 
   let auditPercentage = 3;
 
-  function drawGrid(numBlue) {
+  function drawGrid(numBlue, auditPercentage) {
     let blueCount = 0;
     let indicesToAudit = [];
     while (indicesToAudit.length < auditPercentage) {
@@ -26,7 +26,7 @@ function init() {
           .attr('transform', `translate(${x * scale}, ${y * scale})`)
           .attr('width', scale)
           .attr('height', scale)
-          .attr('fill', `${blueCount <= numBlue ? "blue" : "yellow"}`)
+          .attr('fill', `${blueCount < numBlue ? "blue" : "yellow"}`)
           .attr('stroke', `${indicesToAudit.includes(x * 10 + y) ? "red" : "grey"}`); // make this red if it's one of the audited squares
         // add 'stroke-width' attribute if it's audited
         blueCount++;
@@ -41,17 +41,11 @@ function init() {
         .attr('transform', `translate(${x * scale}, ${y * scale})`)
         .attr('width', scale)
         .attr('height', scale)
+        .attr('fill', `${x * 10 + y <= numBlue ? "blue" : "yellow"}`)
         .attr('stroke', "red")
         .attr('stroke-width', "1.5");
     })
   }
-
-
-  d3.select("#vote-percentage").on("input", function () {
-    updateWinPercentage(+this.value);
-  });
-  updateWinPercentage(numBlue);
-  drawGrid(numBlue);
 
   // update the elements
   function updateWinPercentage(newPercentage) {
@@ -59,10 +53,36 @@ function init() {
     // adjust the text on the range slider
     d3.select("#vote-percentage-value").text(newPercentage);
     d3.select("#vote-percentage").property("value", newPercentage);
+    numBlue = newPercentage;
 
     // update the rircle radius
-    drawGrid(newPercentage);
+    drawGrid(newPercentage, auditPercentage);
   }
+
+
+
+  // update the elements
+  function updateAuditPercentage(newPercentage) {
+
+    // adjust the text on the range slider
+    d3.select("#audit-percentage-value").text(newPercentage);
+    d3.select("#audit-percentage").property("value", newPercentage);
+    auditPercentage = newPercentage;
+    // update the rircle radius
+    drawGrid(numBlue, newPercentage);
+  }
+
+  d3.select("#vote-percentage").on("input", function () {
+    updateWinPercentage(+this.value);
+  });
+  updateWinPercentage(numBlue);
+
+  d3.select("#audit-percentage").on("input", function () {
+    updateAuditPercentage(+this.value);
+  });
+  updateAuditPercentage(auditPercentage);
+
+  drawGrid(numBlue, auditPercentage);
 
 }
 
