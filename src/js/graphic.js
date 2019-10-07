@@ -210,6 +210,11 @@ function simulation2() {
     step: 1,
   });
 
+  slider.noUiSlider.on('set', () => {
+    console.log('changed', slider.noUiSlider.get());
+  });
+
+  // function renderUpToStep(idx) {}
   const svg = d3
     .select('body')
     .append('svg')
