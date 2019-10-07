@@ -1,9 +1,15 @@
 /* global d3 */
+import { concat, fill, shuffle, slice } from 'lodash';
 function resize() { }
 
 function init() {
-  console.log('Make something awesome!');
+  simulation1();
+  simulation2();
+}
 
+
+
+function simulation1() {
   const scale = 10;
   let root = d3.select("#simulation1 svg");
 
@@ -28,7 +34,6 @@ function init() {
           .attr('height', scale)
           .attr('fill', `${blueCount < numBlue ? "blue" : "yellow"}`)
           .attr('stroke', `${indicesToAudit.includes(x * 10 + y) ? "red" : "grey"}`); // make this red if it's one of the audited squares
-        // add 'stroke-width' attribute if it's audited
         blueCount++;
       }
     }
@@ -36,7 +41,6 @@ function init() {
     indicesToAudit.forEach(item => {
       const x = Math.floor(item / 10);
       const y = item % 10;
-      console.log(indicesToAudit, item, x, y);
       root.append('rect')
         .attr('transform', `translate(${x * scale}, ${y * scale})`)
         .attr('width', scale)
@@ -83,6 +87,55 @@ function init() {
   updateAuditPercentage(auditPercentage);
 
   drawGrid(numBlue, auditPercentage);
+
+}
+
+
+function simulation2() {
+
+  const scale = 10;
+  let root = d3.select("#simulation2 svg");
+  let min = 50;
+  let max = 61;
+  let numBlue = Math.floor(Math.random() * (max - min) + min);
+  let votes = concat(fill(Array(numBlue), 'blue'), fill(Array(100 - numBlue), 'yellow'));
+
+  // shufftle votes up
+  votes = shuffle(votes)
+  console.log(votes);
+  let precinctTallies = []
+  for (let x = 0; x < 10; x++) {
+    let precinct = { name: `Precinct ${x + 1}` }
+    precinct['votes'] = slice(votes, x * 10, (x * 10) + 10)
+    precinctTallies.push(precinct);
+  }
+
+  console.log(precinctTallies);
+
+  // for (let x = 0; x < 10; x++) {
+  //   for (let y = 0; y < 10; y++) {
+  //     root.append('rect')
+  //       .attr('transform', `translate(${x * scale}, ${y * scale})`)
+  //       .attr('width', scale)
+  //       .attr('height', scale)
+  //       .attr('fill', `${blueCount < numBlue ? "blue" : "yellow"}`)
+  //       .attr('stroke', "grey");
+  //     blueCount++;
+  //   }
+  // }
+
+
+  // If we've picked a squarea already, add text to it and middle it
+
+
+  // function doStep() {
+
+  // }
+
+
+  // function runUntilCompletion {
+  //   // if not stop...
+  // }
 
 }
 
