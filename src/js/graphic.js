@@ -1,5 +1,5 @@
 /* global d3 */
-import { concat, fill, shuffle, slice } from 'lodash';
+import { concat, fill, random, shuffle, slice } from 'lodash';
 function resize() { }
 
 function init() {
@@ -14,8 +14,8 @@ function simulation1() {
   let root = d3.select("#simulation1 svg");
 
   let min = 50;
-  let max = 61;
-  let numBlue = Math.floor(Math.random() * (max - min) + min);
+  let max = 62;
+  let numBlue = random(min, max);
 
   let auditPercentage = 3;
 
@@ -94,15 +94,14 @@ function simulation1() {
 function simulation2() {
 
   const scale = 10;
-  let root = d3.select("#simulation2 svg");
   let min = 50;
-  let max = 61;
-  let numBlue = Math.floor(Math.random() * (max - min) + min);
+  let max = 62;
+  // Thus average count will be 14 if blue wins with 80%
+  let numBlue = 80; //random(min, max);
   let votes = concat(fill(Array(numBlue), 'blue'), fill(Array(100 - numBlue), 'yellow'));
 
   // shufftle votes up
   votes = shuffle(votes)
-  console.log(votes);
   let precinctTallies = []
   for (let x = 0; x < 10; x++) {
     let precinct = { name: `Precinct ${x + 1}` }
@@ -110,19 +109,69 @@ function simulation2() {
     precinctTallies.push(precinct);
   }
 
-  console.log(precinctTallies);
+  for (let x = 0; x < 10; x++) {
+    let root = d3.select(`#precinct${x + 1}`);
+    for (let y = 0; y < 10; y++) {
+      root.append('rect')
+        .attr('transform', `translate(${y * scale}, 0)`)
+        .attr('width', scale)
+        .attr('height', scale)
+        .attr('fill', precinctTallies[x]['votes'][y])
+        .attr('stroke', "grey"); // make this red if it's one of the audited squares
+    }
+  }
 
-  // for (let x = 0; x < 10; x++) {
-  //   for (let y = 0; y < 10; y++) {
-  //     root.append('rect')
-  //       .attr('transform', `translate(${x * scale}, ${y * scale})`)
-  //       .attr('width', scale)
-  //       .attr('height', scale)
-  //       .attr('fill', `${blueCount < numBlue ? "blue" : "yellow"}`)
-  //       .attr('stroke', "grey");
-  //     blueCount++;
-  //   }
-  // }
+  // do the auditing!
+  // assumes risk limit is 10%
+  let total = 1;
+  let tolerance = 1 // generally, this is ignored in the simple calculations, this is equivalent to 1%
+  // Will not work correctly if it is a tie
+  let winner = numBlue > 50 ? "blue" : "yellow";
+  // To write the number of times it's been audited
+  let auditedVotes = [];
+  let runningTotal = [];
+  while (total < 9.9) {
+    if (total < 0.011) {
+      console.log("manal recount required");
+      break;
+    }
+    let index = random(0, 101)
+    let vote = votes[index];
+    if (vote === winner) {
+      total *= (numBlue - tolerance) / 50;
+    } else {
+      total *= (100 - (numBlue - tolerance)) / 50;
+    }
+
+    runningTotal.push(total);
+
+
+    let root = d3.select(`#precinct${Math.floor(index / 10)}`);
+    root.append('rect')
+      .attr('transform', `translate(${index % 10 * scale}, 0)`)
+      .attr('width', scale)
+      .attr('height', scale)
+      .attr('fill', vote)
+      .attr('stroke', "green");
+
+    // if (auditedVotes.hasOwnProperty(index)) {
+    //   auditedVotes[index] += 1;
+
+
+    // } else {
+    //   auditedVotes[index] = 1;
+    //   // make green to show that it has been audited
+    //   let root = d3.select(`#precinct${Math.floor(index / 10)}`);
+    //   root.append('rect')
+    //     .attr('transform', `translate(${index % 10 * scale}, 0)`)
+    //     .attr('width', scale)
+    //     .attr('height', scale)
+    //     .attr('fill', 'green')
+    //     .attr('stroke', "grey");
+    // }
+
+  }
+  console.log("done", auditedVotes)
 
 
   // If we've picked a squarea already, add text to it and middle it
