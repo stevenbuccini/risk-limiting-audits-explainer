@@ -2,6 +2,11 @@
 import { concat, fill, random, shuffle, slice } from 'lodash';
 function resize() { }
 
+
+let margin = { top: 20, right: 10, bottom: 20, left: 10 };
+let width = 640 - margin.left - margin.right,
+  height = 500 - margin.top - margin.bottom;
+
 function init() {
   simulation1();
   simulation2();
@@ -12,6 +17,10 @@ function init() {
 function simulation1() {
   const scale = 10;
   let root = d3.select("#simulation1 svg");
+  // .attr("width", width + margin.left + margin.right)
+  // .attr("height", height + margin.top + margin.bottom)
+  // .append("g")
+  // .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
   let min = 50;
   let max = 62;
@@ -171,8 +180,61 @@ function simulation2() {
     // }
 
   }
-  console.log("done", auditedVotes)
+  console.log("done", runningTotal.length)
 
+
+  // Try to use this when finished: https://bl.ocks.org/gordlea/27370d1eea8464b04538e6d8ced39e89
+  let n = runningTotal.length;
+  let margin = { top: 50, right: 50, bottom: 50, left: 50 };
+  let width = window.innerWidth - margin.left - margin.right; // Use the window's width 
+  let height = window.innerHeight - margin.top - margin.bottom; // Use the window's height
+
+  let xScale = d3.scaleLinear()
+    .domain([0, n - 1]) // input
+    .range([0, width]); // output
+
+  let yScale = d3.scaleLinear()
+    .domain([0, 1]) // input 
+    .range([height, 0]); // output 
+
+  let line = d3.line()
+    .x(function (d, i) { return xScale(i); }) // set the x values for the line generator
+    .y(function (d) { return yScale(d.y); }) // set the y values for the line generator 
+    .curve(d3.curveMonotoneX) // apply smoothing to the line
+
+  let dataset = d3.range(runningTotal.length).map(function (d) { return { "y": runningTotal[d] } })
+  console.log("dataset", dataset)
+
+  let svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+
+  svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(xScale));
+
+  svg.append("g")
+    .attr("class", "y axis")
+    .call(d3.axisLeft(yScale));
+
+
+  svg.append("path")
+    .datum(dataset) // 10. Binds data to the line 
+    .attr("class", "line") // Assign a class for styling 
+    .attr("d", line); // 11. Calls the line generator 
+
+
+  svg.selectAll(".dot")
+    .data(dataset)
+    .enter().append("circle") // Uses the enter().append() method
+    .attr("class", "dot") // Assign a class for styling
+    .attr("cx", function (d, i) { return xScale(i) })
+    .attr("cy", function (d) { return yScale(d.y) })
+    .attr("r", 5)
 
   // If we've picked a squarea already, add text to it and middle it
 
