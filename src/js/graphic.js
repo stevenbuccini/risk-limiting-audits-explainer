@@ -187,14 +187,14 @@ function simulation2() {
   let n = runningTotal.length;
   let margin = { top: 50, right: 50, bottom: 50, left: 50 };
   let width = window.innerWidth - margin.left - margin.right; // Use the window's width 
-  let height = window.innerHeight - margin.top - margin.bottom; // Use the window's height
+  let height = 500 - margin.top - margin.bottom; // Use the window's height
 
   let xScale = d3.scaleLinear()
     .domain([0, n - 1]) // input
     .range([0, width]); // output
 
   let yScale = d3.scaleLinear()
-    .domain([0, 1]) // input 
+    .domain([0, 11]) // input 
     .range([height, 0]); // output 
 
   let line = d3.line()
