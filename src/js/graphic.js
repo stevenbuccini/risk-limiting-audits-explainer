@@ -202,14 +202,17 @@ function simulation2() {
   });
 
   slider.noUiSlider.on('set', () => {
-    console.log('changed', Math.floor(slider.noUiSlider.get()));
     renderUpToStep(Math.floor(slider.noUiSlider.get()));
   });
 
+  let path;
   function renderUpToStep(idx) {
+    // clear previous line segments and circles
+    if (path) path.remove();
+    d3.selectAll('.dot').remove();
+
     for (let i = 0; i < idx; i++) {
       const vote = runningTotal[i];
-      console.log(vote);
       const root = d3.select(
         `#precinct${Math.floor(vote.auditedVoteIndex / 10)}`
       );
@@ -224,7 +227,7 @@ function simulation2() {
         .attr('fill', vote.color)
         .attr('stroke', 'chartreuse');
     }
-    svg
+    path = svg
       .append('path')
       .datum(slice(dataset, 0, idx)) // 10. Binds data to the line
       .attr('class', 'line') // Assign a class for styling
