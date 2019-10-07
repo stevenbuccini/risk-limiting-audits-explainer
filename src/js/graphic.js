@@ -153,15 +153,6 @@ function simulation2() {
     }
 
     runningTotal.push({ auditedVoteIndex: index, color: vote, total });
-
-    const root = d3.select(`#precinct${Math.floor(index / 10)}`);
-    root
-      .append('rect')
-      .attr('transform', `translate(${(index % 10) * scale}, 0)`)
-      .attr('width', scale)
-      .attr('height', scale)
-      .attr('fill', vote)
-      .attr('stroke', 'chartreuse');
   }
 
   // Try to use this when finished: https://bl.ocks.org/gordlea/27370d1eea8464b04538e6d8ced39e89
@@ -206,15 +197,56 @@ function simulation2() {
       min: [0],
       max: [runningTotal.length],
     },
-    start: [3],
+    start: [0],
     step: 1,
   });
 
   slider.noUiSlider.on('set', () => {
-    console.log('changed', slider.noUiSlider.get());
+    console.log('changed', Math.floor(slider.noUiSlider.get()));
+    renderUpToStep(Math.floor(slider.noUiSlider.get()));
   });
 
-  // function renderUpToStep(idx) {}
+  function renderUpToStep(idx) {
+    for (let i = 0; i < idx; i++) {
+      const vote = runningTotal[i];
+      console.log(vote);
+      const root = d3.select(
+        `#precinct${Math.floor(vote.auditedVoteIndex / 10)}`
+      );
+      root
+        .append('rect')
+        .attr(
+          'transform',
+          `translate(${(vote.auditedVoteIndex % 10) * scale}, 0)`
+        )
+        .attr('width', scale)
+        .attr('height', scale)
+        .attr('fill', vote.color)
+        .attr('stroke', 'chartreuse');
+    }
+    svg
+      .append('path')
+      .datum(slice(dataset, 0, idx)) // 10. Binds data to the line
+      .attr('class', 'line') // Assign a class for styling
+      .attr('d', line); // 11. Calls the line generator
+    svg
+      .selectAll('.dot')
+      .data(slice(dataset, 0, idx))
+      .enter()
+      .append('circle') // Uses the enter().append() method
+      .attr('class', 'dot') // Assign a class for styling
+      .attr('cx', function(d, i) {
+        return xScale(i);
+      })
+      .attr('cy', function(d) {
+        return yScale(d.y);
+      })
+      .attr('r', 5)
+      .attr('fill', function(d) {
+        return d.color;
+      });
+  }
+
   const svg = d3
     .select('body')
     .append('svg')
@@ -234,29 +266,6 @@ function simulation2() {
     .attr('class', 'y axis')
     .call(d3.axisLeft(yScale));
 
-  svg
-    .append('path')
-    .datum(dataset) // 10. Binds data to the line
-    .attr('class', 'line') // Assign a class for styling
-    .attr('d', line); // 11. Calls the line generator
-
-  svg
-    .selectAll('.dot')
-    .data(dataset)
-    .enter()
-    .append('circle') // Uses the enter().append() method
-    .attr('class', 'dot') // Assign a class for styling
-    .attr('cx', function(d, i) {
-      return xScale(i);
-    })
-    .attr('cy', function(d) {
-      return yScale(d.y);
-    })
-    .attr('r', 5)
-    .attr('fill', function(d) {
-      return d.color;
-    });
-
   // Add threshold
   // https://codepen.io/dannyhc/pen/WQdmwa
   svg
@@ -267,15 +276,34 @@ function simulation2() {
     .style('stroke', '#2ecc71')
     .style('stroke-width', '5px')
     .text('threshold');
-  // If we've picked a squarea already, add text to it and middle it
 
-  // function doStep() {
+  // svg
+  //   .selectAll('.dot')
+  //   .data(dataset)
+  //   .enter()
+  //   .append('circle') // Uses the enter().append() method
+  //   .attr('class', 'dot') // Assign a class for styling
+  //   .attr('cx', function(d, i) {
+  //     return xScale(i);
+  //   })
+  //   .attr('cy', function(d) {
+  //     return yScale(d.y);
+  //   })
+  //   .attr('r', 5)
+  //   .attr('fill', function(d) {
+  //     return d.color;
+  //   });
 
-  // }
-
-  // function runUntilCompletion {
-  //   // if not stop...
-  // }
+  // // Add threshold
+  // // https://codepen.io/dannyhc/pen/WQdmwa
+  // svg
+  //   .append('g')
+  //   .attr('transform', `translate(0, ${yScale(9.9)})`)
+  //   .append('line')
+  //   .attr('x2', width)
+  //   .style('stroke', '#2ecc71')
+  //   .style('stroke-width', '5px')
+  //   .text('threshold');
 }
 
 export default { init, resize };
