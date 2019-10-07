@@ -178,7 +178,6 @@ function simulation2() {
     //     .attr('stroke', "grey");
     // }
   }
-  console.log('done', runningTotal.length);
 
   // Try to use this when finished: https://bl.ocks.org/gordlea/27370d1eea8464b04538e6d8ced39e89
   const n = runningTotal.length;
@@ -209,8 +208,6 @@ function simulation2() {
   const dataset = d3.range(runningTotal.length).map(function(d) {
     return { color: runningTotal[d].color, y: runningTotal[d].total };
   });
-
-  console.log(dataset);
 
   const svg = d3
     .select('body')
@@ -251,7 +248,6 @@ function simulation2() {
     })
     .attr('r', 5)
     .attr('fill', function(d) {
-      console.log(d.color);
       return d.color;
     });
 
