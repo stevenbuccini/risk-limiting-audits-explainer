@@ -236,6 +236,17 @@ function simulation2() {
     .attr("cy", function (d) { return yScale(d.y) })
     .attr("r", 5)
 
+
+
+  // Add threshold
+  // https://codepen.io/dannyhc/pen/WQdmwa
+  svg.append("g")
+    .attr("transform", `translate(0, ${yScale(9.9)})`)
+    .append("line")
+    .attr("x2", width)
+    .style("stroke", "#2ecc71")
+    .style("stroke-width", "5px")
+    .text("threshold")
   // If we've picked a squarea already, add text to it and middle it
 
 
