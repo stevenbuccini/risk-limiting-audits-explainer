@@ -197,11 +197,16 @@ function simulation2() {
   const slider = document.getElementById('simulation2-stepper');
 
   noUiSlider.create(slider, {
-    start: [3],
+    pips: {
+      mode: 'values',
+      values: d3.range(runningTotal.length + 1),
+      density: 0,
+    },
     range: {
       min: [0],
-      max: [100],
+      max: [runningTotal.length],
     },
+    start: [3],
     step: 1,
   });
 
