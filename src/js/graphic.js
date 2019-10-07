@@ -194,7 +194,7 @@ function simulation2() {
     .range([0, width]); // output
 
   let yScale = d3.scaleLinear()
-    .domain([0, 11]) // input 
+    .domain([0, 12]) // input 
     .range([height, 0]); // output 
 
   let line = d3.line()
