@@ -1,5 +1,6 @@
 /* global d3 */
 import { concat, fill, random, shuffle, slice } from 'lodash';
+import noUiSlider from 'nouislider';
 
 function resize() {}
 
@@ -137,7 +138,6 @@ function simulation2() {
   // Will not work correctly if it is a tie
   const winner = numBlue > 50 ? 'blue' : 'yellow';
   // To write the number of times it's been audited
-  const auditedVotes = [];
   const runningTotal = [];
   while (total < 9.9) {
     if (total < 0.011) {
@@ -152,7 +152,7 @@ function simulation2() {
       total *= (100 - (numBlue - tolerance)) / 50;
     }
 
-    runningTotal.push({ color: vote, total });
+    runningTotal.push({ auditedVoteIndex: index, color: vote, total });
 
     const root = d3.select(`#precinct${Math.floor(index / 10)}`);
     root
@@ -162,21 +162,6 @@ function simulation2() {
       .attr('height', scale)
       .attr('fill', vote)
       .attr('stroke', 'chartreuse');
-
-    // if (auditedVotes.hasOwnProperty(index)) {
-    //   auditedVotes[index] += 1;
-
-    // } else {
-    //   auditedVotes[index] = 1;
-    //   // make green to show that it has been audited
-    //   let root = d3.select(`#precinct${Math.floor(index / 10)}`);
-    //   root.append('rect')
-    //     .attr('transform', `translate(${index % 10 * scale}, 0)`)
-    //     .attr('width', scale)
-    //     .attr('height', scale)
-    //     .attr('fill', 'green')
-    //     .attr('stroke', "grey");
-    // }
   }
 
   // Try to use this when finished: https://bl.ocks.org/gordlea/27370d1eea8464b04538e6d8ced39e89
@@ -207,6 +192,17 @@ function simulation2() {
 
   const dataset = d3.range(runningTotal.length).map(function(d) {
     return { color: runningTotal[d].color, y: runningTotal[d].total };
+  });
+
+  const slider = document.getElementById('simulation2-stepper');
+
+  noUiSlider.create(slider, {
+    start: [3],
+    range: {
+      min: [0],
+      max: [100],
+    },
+    step: 1,
   });
 
   const svg = d3

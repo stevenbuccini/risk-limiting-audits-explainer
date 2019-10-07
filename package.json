@@ -10,7 +10,7 @@
 	"dependencies": {
 		"lodash": "^4.17.15",
 		"lodash.debounce": "4.0.8",
-		"nouislider": "14.0.2",
+		"nouislider": "^14.0.2",
 		"superagent": "5.1.0"
 	},
 	"devDependencies": {
