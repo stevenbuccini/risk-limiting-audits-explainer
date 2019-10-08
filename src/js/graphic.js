@@ -146,10 +146,11 @@ function simulation2() {
   let total = 1;
   const tolerance = 1; // generally, this is ignored in the simple calculations, this is equivalent to 1%
   // Will not work correctly if it is a tie
-  const winner = numParty1 > 50 ? 'blue' : 'yellow';
+  const winner = numParty1 > 50 ? party1Color : party2Color;
   // To write the number of times it's been audited
   const runningTotal = [];
   while (total < 9.9) {
+    // debugger;
     if (total < 0.011) {
       console.log('manal recount required');
       break;
@@ -170,8 +171,10 @@ function simulation2() {
   const margin = { top: 50, right: 50, bottom: 50, left: 50 };
 
 
-  const width = d3.select("#running-total").node().getBBox().width - margin.left - margin.right; // Use the window's width
+  const width = window.innerWidth - margin.left - margin.right; // Use the window's width
   const height = 500 - margin.top - margin.bottom; // Use the window's height
+
+  console.log(width, height)
 
   const xScale = d3
     .scaleLinear()
@@ -218,7 +221,8 @@ function simulation2() {
   });
 
   const svg = d3
-    .select('#running-total')
+    .select('body')
+    .append('svg')
     .attr('width', width + margin.left + margin.right)
     .attr('height', height + margin.top + margin.bottom)
     .append('g')
