@@ -14,7 +14,7 @@ function init() {
 }
 
 function simulation1() {
-  const scale = 10;
+  const scale = 5;
   const root = d3.select('#simulation1 svg');
   // .attr("width", width + margin.left + margin.right)
   // .attr("height", height + margin.top + margin.bottom)
