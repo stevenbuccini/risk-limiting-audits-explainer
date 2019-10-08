@@ -17,6 +17,7 @@ const bodyColor = '#7DCDD2';
 function init() {
   simulation1();
   simulation2();
+  simulation3();
 }
 
 function simulation1() {
@@ -150,7 +151,6 @@ function simulation2() {
   // To write the number of times it's been audited
   const runningTotal = [];
   while (total < 9.9) {
-    // debugger;
     if (total < 0.011) {
       console.log('manal recount required');
       break;
@@ -216,7 +216,7 @@ function simulation2() {
     step: 1,
   });
 
-  slider.noUiSlider.on('set', () => {
+  slider.noUiSlider.on('slide', () => {
     renderUpToStep(Math.floor(slider.noUiSlider.get()));
   });
 
@@ -280,7 +280,8 @@ function simulation2() {
       .append('path')
       .datum(slice(dataset, 0, idx)) // 10. Binds data to the line
       .attr('class', 'line') // Assign a class for styling
-      .attr('d', line); // 11. Calls the line generator
+      .attr('d', line) // 11. Calls the line generator
+      .attr('color', textColor);
     svg
       .selectAll('.dot')
       .data(slice(dataset, 0, idx))
@@ -300,4 +301,122 @@ function simulation2() {
   }
 }
 
+function simulation3() {
+  const ballotNumSlider = document.getElementById('ballots-cast-slider');
+
+  noUiSlider.create(ballotNumSlider, {
+    pips: {
+      mode: 'range',
+      density: 0,
+    },
+
+    range: {
+      // Starting at 500, step the value by 500,
+      // until 4000 is reached. From there, step by 1000.
+      min: [100],
+      '10%': [10000, 1000],
+      '50%': [100000, 100000],
+      max: [10000000],
+    },
+    start: [100],
+  });
+
+  ballotNumSlider.noUiSlider.on('set', () => {
+    document.getElementById('ballots-cast-num').textContent = Math.floor(
+      ballotNumSlider.noUiSlider.get()
+    ).toString();
+    updateAuditTotals();
+  });
+
+  const marginVictorySlider = document.getElementById('margin-of-victory');
+
+  noUiSlider.create(marginVictorySlider, {
+    pips: {
+      mode: 'range',
+      density: 0,
+    },
+
+    range: {
+      min: [1],
+      max: [50],
+    },
+    start: [9],
+  });
+
+  marginVictorySlider.noUiSlider.on('set', () => {
+    document.getElementById('margin-victory-num').textContent = `${Math.floor(
+      marginVictorySlider.noUiSlider.get()
+    ).toString()}%`;
+    updateAuditTotals();
+  });
+
+  const traditionalAuditSlider = document.getElementById(
+    'traditional-audit-percent'
+  );
+
+  noUiSlider.create(traditionalAuditSlider, {
+    pips: {
+      mode: 'range',
+      density: 0,
+    },
+
+    range: {
+      min: [0],
+      max: [100],
+    },
+    start: [3],
+  });
+
+  traditionalAuditSlider.noUiSlider.on('set', () => {
+    document.getElementById('audit-percent-num').textContent = `${Math.floor(
+      traditionalAuditSlider.noUiSlider.get()
+    ).toString()}%`;
+
+    updateAuditTotals();
+  });
+
+  function updateAuditTotals() {
+    const numBallots = Math.floor(ballotNumSlider.noUiSlider.get());
+
+    // Traditional calculations
+    const auditPercentage = Math.floor(traditionalAuditSlider.noUiSlider.get());
+    document.getElementById('traditional-number').textContent = Math.ceil(
+      numBallots * (auditPercentage / 100)
+    ).toString();
+
+    // RLA calculations
+    const marginVictory = Math.floor(marginVictorySlider.noUiSlider.get());
+
+    let votes = concat(
+      fill(Array(Math.round(numBallots * (marginVictory / 100))), 'winner'),
+      fill(Array(Math.round(numBallots * (1 - marginVictory / 100))), 'loser')
+    );
+
+    // shufftle votes up
+    votes = shuffle(votes);
+    console.log(votes);
+
+    let total = 1;
+    const tolerance = 1; // generally, this is ignored in the simple calculations, this is equivalent to 1%
+    let count = 0;
+    while (total < 9.9) {
+      if (total < 0.011) {
+        document.getElementById('rla-number').textContent =
+          'Full recount required!';
+        break;
+      }
+      const index = random(0, numBallots);
+      const vote = votes[index];
+      if (vote === 'winner') {
+        total *= (marginVictory - tolerance) / 50;
+      } else {
+        total *= (100 - (marginVictory - tolerance)) / 50;
+      }
+
+      count += 1;
+    }
+
+    document.getElementById('rla-number').textContent = count.toString();
+  }
+}
 export default { init, resize };
