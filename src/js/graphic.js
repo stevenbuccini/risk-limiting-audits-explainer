@@ -2,7 +2,7 @@
 import { concat, fill, random, shuffle, slice } from 'lodash';
 import noUiSlider from 'nouislider';
 
-function resize() {}
+function resize() { }
 
 const margin = { top: 20, right: 10, bottom: 20, left: 10 };
 const width = 640 - margin.left - margin.right;
@@ -11,6 +11,8 @@ const height = 500 - margin.top - margin.bottom;
 const party1Color = '#63BF67';
 const party2Color = '#AF5757';
 const highlightColor = '#FFE600';
+const textColor = '#5d5d5d';
+const bodyColor = '#7DCDD2';
 
 function init() {
   simulation1();
@@ -93,12 +95,12 @@ function simulation1() {
     drawGrid(numParty1, newPercentage);
   }
 
-  d3.select('#vote-percentage').on('input', function() {
+  d3.select('#vote-percentage').on('input', function () {
     updateWinPercentage(+this.value);
   });
   updateWinPercentage(numParty1);
 
-  d3.select('#audit-percentage').on('input', function() {
+  d3.select('#audit-percentage').on('input', function () {
     updateAuditPercentage(+this.value);
   });
   updateAuditPercentage(auditPercentage);
@@ -113,8 +115,8 @@ function simulation2() {
   // Thus average count will be 14 if blue wins with 80%
   const numParty1 = 80; // random(min, max);
   let votes = concat(
-    fill(Array(numParty1), 'blue'),
-    fill(Array(100 - numParty1), 'yellow')
+    fill(Array(numParty1), party1Color),
+    fill(Array(100 - numParty1), party2Color)
   );
 
   // shufftle votes up
@@ -135,7 +137,7 @@ function simulation2() {
         .attr('width', scale)
         .attr('height', scale)
         .attr('fill', precinctTallies[x].votes[y])
-        .attr('stroke', 'grey'); // make this red if it's one of the audited squares
+        .attr('stroke', 'white'); // make this red if it's one of the audited squares
     }
   }
 
@@ -152,7 +154,7 @@ function simulation2() {
       console.log('manal recount required');
       break;
     }
-    const index = random(0, 101);
+    const index = random(0, 100);
     const vote = votes[index];
     if (vote === winner) {
       total *= (numParty1 - tolerance) / 50;
@@ -166,7 +168,9 @@ function simulation2() {
   // Try to use this when finished: https://bl.ocks.org/gordlea/27370d1eea8464b04538e6d8ced39e89
   const n = runningTotal.length;
   const margin = { top: 50, right: 50, bottom: 50, left: 50 };
-  const width = window.innerWidth - margin.left - margin.right; // Use the window's width
+
+
+  const width = d3.select("#running-total").node().getBBox().width - margin.left - margin.right; // Use the window's width
   const height = 500 - margin.top - margin.bottom; // Use the window's height
 
   const xScale = d3
@@ -181,15 +185,15 @@ function simulation2() {
 
   const line = d3
     .line()
-    .x(function(d, i) {
+    .x(function (d, i) {
       return xScale(i);
     }) // set the x values for the line generator
-    .y(function(d) {
+    .y(function (d) {
       return yScale(d.y);
     }) // set the y values for the line generator
     .curve(d3.curveMonotoneX); // apply smoothing to the line
 
-  const dataset = d3.range(runningTotal.length).map(function(d) {
+  const dataset = d3.range(runningTotal.length).map(function (d) {
     return { color: runningTotal[d].color, y: runningTotal[d].total };
   });
 
@@ -213,54 +217,8 @@ function simulation2() {
     renderUpToStep(Math.floor(slider.noUiSlider.get()));
   });
 
-  let path;
-  function renderUpToStep(idx) {
-    // clear previous line segments and circles
-    if (path) path.remove();
-    d3.selectAll('.dot').remove();
-
-    for (let i = 0; i < idx; i++) {
-      const vote = runningTotal[i];
-      const root = d3.select(
-        `#precinct${Math.floor(vote.auditedVoteIndex / 10)}`
-      );
-      root
-        .append('rect')
-        .attr(
-          'transform',
-          `translate(${(vote.auditedVoteIndex % 10) * scale}, 0)`
-        )
-        .attr('width', scale)
-        .attr('height', scale)
-        .attr('fill', vote.color)
-        .attr('stroke', 'chartreuse');
-    }
-    path = svg
-      .append('path')
-      .datum(slice(dataset, 0, idx)) // 10. Binds data to the line
-      .attr('class', 'line') // Assign a class for styling
-      .attr('d', line); // 11. Calls the line generator
-    svg
-      .selectAll('.dot')
-      .data(slice(dataset, 0, idx))
-      .enter()
-      .append('circle') // Uses the enter().append() method
-      .attr('class', 'dot') // Assign a class for styling
-      .attr('cx', function(d, i) {
-        return xScale(i);
-      })
-      .attr('cy', function(d) {
-        return yScale(d.y);
-      })
-      .attr('r', 5)
-      .attr('fill', function(d) {
-        return d.color;
-      });
-  }
-
   const svg = d3
-    .select('body')
-    .append('svg')
+    .select('#running-total')
     .attr('width', width + margin.left + margin.right)
     .attr('height', height + margin.top + margin.bottom)
     .append('g')
@@ -284,37 +242,60 @@ function simulation2() {
     .attr('transform', `translate(0, ${yScale(9.9)})`)
     .append('line')
     .attr('x2', width)
-    .style('stroke', '#2ecc71')
+    .style('stroke', bodyColor)
     .style('stroke-width', '5px')
     .text('threshold');
 
-  // svg
-  //   .selectAll('.dot')
-  //   .data(dataset)
-  //   .enter()
-  //   .append('circle') // Uses the enter().append() method
-  //   .attr('class', 'dot') // Assign a class for styling
-  //   .attr('cx', function(d, i) {
-  //     return xScale(i);
-  //   })
-  //   .attr('cy', function(d) {
-  //     return yScale(d.y);
-  //   })
-  //   .attr('r', 5)
-  //   .attr('fill', function(d) {
-  //     return d.color;
-  //   });
 
-  // // Add threshold
-  // // https://codepen.io/dannyhc/pen/WQdmwa
-  // svg
-  //   .append('g')
-  //   .attr('transform', `translate(0, ${yScale(9.9)})`)
-  //   .append('line')
-  //   .attr('x2', width)
-  //   .style('stroke', '#2ecc71')
-  //   .style('stroke-width', '5px')
-  //   .text('threshold');
+  let path;
+  console.log(runningTotal);
+  function renderUpToStep(idx) {
+    // clear previous line segments and circles
+    if (path) path.remove();
+    d3.selectAll('.dot').remove();
+    d3.selectAll('.audited').remove();
+
+
+    for (let i = 0; i < idx; i++) {
+      const vote = runningTotal[i];
+      const root = d3.select(
+        `#precinct${Math.floor(vote.auditedVoteIndex / 10) + 1}`
+      );
+      root
+        .append('rect')
+        .attr(
+          'transform',
+          `translate(${(vote.auditedVoteIndex % 10) * scale}, 0)`
+        )
+        .attr('class', 'audited')
+        .attr('width', scale)
+        .attr('height', scale)
+        .attr('fill', vote.color)
+        .attr('stroke', highlightColor)
+        .attr('stroke-width', '1.5');
+    }
+    path = svg
+      .append('path')
+      .datum(slice(dataset, 0, idx)) // 10. Binds data to the line
+      .attr('class', 'line') // Assign a class for styling
+      .attr('d', line); // 11. Calls the line generator
+    svg
+      .selectAll('.dot')
+      .data(slice(dataset, 0, idx))
+      .enter()
+      .append('circle') // Uses the enter().append() method
+      .attr('class', 'dot') // Assign a class for styling
+      .attr('cx', function (d, i) {
+        return xScale(i);
+      })
+      .attr('cy', function (d) {
+        return yScale(d.y);
+      })
+      .attr('r', 5)
+      .attr('fill', function (d) {
+        return d.color;
+      });
+  }
 }
 
 export default { init, resize };

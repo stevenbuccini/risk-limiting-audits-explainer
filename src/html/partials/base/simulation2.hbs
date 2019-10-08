@@ -1,67 +1,102 @@
 <section id="simulation2" class="prose">
   <h2>Working smarter, not harder</h2>
-  <p>It turns out when manually examine at a ballot, it tells you more than just which column to add a vote to. The <i>sequence</i> of votes is also important. Remember the old adage, "two steps forward, one step back"? We can use a similar intuition here.</p>
+  <p>It turns out when manually examine at a ballot, it tells you more than just which column to add a vote to. The
+    <i>sequence</i> of votes is also important. Remember the old adage, "two steps forward, one step back"? We can use a
+    similar intuition here.</p>
 
-  <p>Professor Phillip Stark at the University of California, Berkeley applied fancy mathematics to this problem in order to audit ballots as efficiently as possible. He called this technique a "risk-limiting" audit. There are several different types of risk-limiting audits. While they differ in the ways that they go about selecting the ballots to be examined, each method provides a similar guarantee, backed by statistics, in the result of the election.</p>
+  <p>Professor Phillip Stark at the University of California, Berkeley applied fancy mathematics to this problem in
+    order to audit ballots as efficiently as possible. He called this technique a "risk-limiting" audit. There are
+    several different types of risk-limiting audits. While they differ in the ways that they go about selecting the
+    ballots to be examined, each method provides a similar guarantee, backed by statistics, in the result of the
+    election.</p>
 
 
-  <p>The type of risk-limiting audit we will look at today is called a <i>ballot-polling audit</i>. The basic procedure, heavily simplified, looks as follows:
+  <p>The type of risk-limiting audit we will look at today is called a <i>ballot-polling audit</i>. The basic procedure,
+    heavily simplified, looks as follows:
   </p>
 
   <ol>
     <li>Start a tally at 1</li>
     <li>Randomly select a ballot out of all the ballots cast.</li>
-    <li>If the ballot contains a vote is for the supposed winner, multiply your total by some positive amount. Else, multiply by some fractional amount.</li>
+    <li>If the ballot contains a vote is for the supposed winner, multiply your total by some positive amount. Else,
+      multiply by some fractional amount.</li>
     <li>Place the ballot back into the vote pool.</li>
     <li>Repeat steps 2 and 3 until you reach a threshold.</li>
   </ol>
 
-  <p>Below is a heavily simplified election. 100 votes were cast, 10 at each polling place. Green won with an 80% of the vote and we had to manually examine<span id='rla-audit-count'></span> ballots before we gained the stastical confidnece in the result to stop. Use the slider below to step through each examined ballot step by step. The line graph at the bottom shows our "confidence" in the result. Notice how it ebbs and flows over time depending on the vote being examined and the given sequence.</p>
+  <p>Below is a heavily simplified election. 100 votes were cast, 10 at each polling place. Green won with an 80% of the
+    vote and we had to manually examine<span id='rla-audit-count'></span> ballots before we gained the stastical
+    confidnece in the result to stop. Use the slider below to step through each examined ballot step by step. The line
+    graph at the bottom shows our "confidence" in the result. Notice how it ebbs and flows over time depending on the
+    vote being examined and the given sequence.</p>
+
+
+  <div id="simulation2-stepper"></div>
 
   <div id='simulation2-container'>
 
-    <div id="simulation2-stepper"></div>
+    <div class="precinct-container">
+      <p>Precinct 1</p>
+      <svg id="precinct1" viewBox="0 0 100 10" style="background:white"></svg>
+    </div>
 
-    <p>Precinct 1</p>
-    <svg id="precinct1" viewBox="0 0 100 5" style="background:white"></svg>
+    <div class="precinct-container">
+      <p>Precinct 2</p>
+      <svg id="precinct2" viewBox="0 0 100 10" style="background:white"></svg>
+    </div>
 
+    <div class="precinct-container">
+      <p>Precinct 3</p>
+      <svg id="precinct3" viewBox="0 0 100 10" style="background:white"></svg>
+    </div>
 
-    <p>Precinct 2</p>
-    <svg id="precinct2" viewBox="0 0 100 5" style="background:white"></svg>
+    <div class="precinct-container">
+      <p>Precinct 4</p>
+      <svg id="precinct4" viewBox="0 0 100 10" style="background:white"></svg>
+    </div>
 
-    <p>Precinct 3</p>
-    <svg id="precinct3" viewBox="0 0 100 5" style="background:white"></svg>
+    <div class="precinct-container">
+      <p>Precinct 5</p>
+      <svg id="precinct5" viewBox="0 0 100 10" style="background:white"></svg>
+    </div>
 
+    <div class="precinct-container">
+      <p>Precinct 6</p>
+      <svg id="precinct6" viewBox="0 0 100 10" style="background:white"></svg>
+    </div>
 
-    <p>Precinct 4</p>
-    <svg id="precinct4" viewBox="0 0 100 5" style="background:white"></svg>
+    <div class="precinct-container">
+      <p>Precinct 7</p>
+      <svg id="precinct7" viewBox="0 0 100 10" style="background:white"></svg>
+    </div>
 
-    <p>Precinct 5</p>
-    <svg id="precinct5" viewBox="0 0 100 5" style="background:white"></svg>
+    <div class="precinct-container">
+      <p>Precinct 8</p>
+      <svg id="precinct8" viewBox="0 0 100 10" style="background:white"></svg>
+    </div>
 
-    <p>Precinct 6</p>
-    <svg id="precinct6" viewBox="0 0 100 5" style="background:white"></svg>
+    <div class="precinct-container">
+      <p>Precinct 9</p>
+      <svg id="precinct9" viewBox="0 0 100 10" style="background:white"></svg>
+    </div>
 
-    <p>Precinct 7</p>
-    <svg id="precinct7" viewBox="0 0 100 5" style="background:white"></svg>
+    <div class="precinct-container">
+      <p>Precinct 10</p>
+      <svg id="precinct10" viewBox="0 0 100 10" style="background:white"></svg>
+    </div>
 
-    <span>Precinct 8</span>
-    <svg id="precinct8" viewBox="0 0 100 5" style="background:white"></svg>
-
-    <p>Precinct 9</p>
-    <svg id="precinct9" viewBox="0 0 100 5" style="background:white"></svg>
-
-    <p>Precinct 10</p>
-    <svg id="precinct10" viewBox="0 0 100 5" style="background:white"></svg>
 
   </div>
 
+  <div class="running-total-container">
+    <svg id="running-total" viewBox="0 0 100 100" style="background:white"></svg>
+  </div>
 
-  <p>A couple quick things to point out here. The first is that we use multiplication as it allows us to "accelerate" our progress as we gain confidence. Another is that we can look at the same ballot more than once. This is pretty counterintuitive! Why would we need to verify something if we’ve already manually double-checked it? The answer is that we want to treat every ballot the exact same. Removing some ballots means it gets slightly more likely that we pick a new ballot each time, which could bias our results.</p>
 
-
-  {{!-- <p>Running total</p>
-  <svg id="running-total" viewBox="0 0 100 100" style="background:white"></svg> --}}
-
+  <p>A couple quick things to point out here. The first is that we use multiplication as it allows us to "accelerate"
+    our progress as we gain confidence. Another is that we can look at the same ballot more than once. This is pretty
+    counterintuitive! Why would we need to verify something if we’ve already manually double-checked it? The answer is
+    that we want to treat every ballot the exact same. Removing some ballots means it gets slightly more likely that we
+    pick a new ballot each time, which could bias our results.</p>
 
 </section>
