@@ -4,9 +4,9 @@ import noUiSlider from 'nouislider';
 
 function resize() {}
 
-const margin = { top: 20, right: 10, bottom: 20, left: 10 };
-const width = 640 - margin.left - margin.right;
-const height = 500 - margin.top - margin.bottom;
+// const margin = { top: 20, right: 10, bottom: 20, left: 10 };
+// const width = 640 - margin.left - margin.right;
+// const height = 500 - margin.top - margin.bottom;
 
 const party1Color = '#63BF67';
 const party2Color = '#AF5757';
@@ -133,7 +133,7 @@ function simulation2() {
     for (let y = 0; y < 10; y++) {
       root
         .append('rect')
-        .attr('transform', `translate(${y * scale}, 0)`)
+        .attr('transform', `translate(${y * scale + scale / 2}, ${scale / 2})`)
         .attr('width', scale)
         .attr('height', scale)
         .attr('fill', precinctTallies[x].votes[y])
@@ -170,10 +170,11 @@ function simulation2() {
   const n = runningTotal.length;
   const margin = { top: 50, right: 50, bottom: 50, left: 50 };
 
-  const width = window.innerWidth - margin.left - margin.right; // Use the window's width
+  const width =
+    document.getElementById('running-total-container').offsetWidth -
+    margin.left -
+    margin.right; // Use the window's width
   const height = 500 - margin.top - margin.bottom; // Use the window's height
-
-  console.log(width, height);
 
   const xScale = d3
     .scaleLinear()
@@ -220,7 +221,7 @@ function simulation2() {
   });
 
   const svg = d3
-    .select('body')
+    .select('#running-total-container')
     .append('svg')
     .attr('width', width + margin.left + margin.right)
     .attr('height', height + margin.top + margin.bottom)
@@ -250,7 +251,6 @@ function simulation2() {
     .text('threshold');
 
   let path;
-  console.log(runningTotal);
   function renderUpToStep(idx) {
     // clear previous line segments and circles
     if (path) path.remove();
@@ -266,14 +266,15 @@ function simulation2() {
         .append('rect')
         .attr(
           'transform',
-          `translate(${(vote.auditedVoteIndex % 10) * scale}, 0)`
+          `translate(${(vote.auditedVoteIndex % 10) * scale +
+            scale / 2}, ${scale / 2})`
         )
         .attr('class', 'audited')
         .attr('width', scale)
         .attr('height', scale)
         .attr('fill', vote.color)
         .attr('stroke', highlightColor)
-        .attr('stroke-width', '1.5');
+        .attr('stroke-width', '4');
     }
     path = svg
       .append('path')
