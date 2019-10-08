@@ -14,7 +14,7 @@ function init() {
 }
 
 function simulation1() {
-  const scale = 5;
+  const scale = 10;
   const root = d3.select('#simulation1 svg');
   // .attr("width", width + margin.left + margin.right)
   // .attr("height", height + margin.top + margin.bottom)
@@ -28,6 +28,7 @@ function simulation1() {
   let auditPercentage = 3;
 
   function drawGrid(numBlue, auditPercentage) {
+    root.selectAll('*').remove();
     let blueCount = 0;
     const indicesToAudit = [];
     while (indicesToAudit.length < auditPercentage) {
