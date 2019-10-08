@@ -8,6 +8,10 @@ const margin = { top: 20, right: 10, bottom: 20, left: 10 };
 const width = 640 - margin.left - margin.right;
 const height = 500 - margin.top - margin.bottom;
 
+const party1Color = '#63BF67';
+const party2Color = '#AF5757';
+const highlightColor = '#FFE600';
+
 function init() {
   simulation1();
   simulation2();
@@ -23,13 +27,13 @@ function simulation1() {
 
   const min = 50;
   const max = 62;
-  let numBlue = random(min, max);
+  let numParty1 = random(min, max);
 
   let auditPercentage = 3;
 
-  function drawGrid(numBlue, auditPercentage) {
+  function drawGrid(numParty1, auditPercentage) {
     root.selectAll('*').remove();
-    let blueCount = 0;
+    let party1Count = 0;
     const indicesToAudit = [];
     while (indicesToAudit.length < auditPercentage) {
       const r = Math.floor(Math.random() * 100) + 1;
@@ -42,12 +46,15 @@ function simulation1() {
           .attr('transform', `translate(${x * scale}, ${y * scale})`)
           .attr('width', scale)
           .attr('height', scale)
-          .attr('fill', `${blueCount < numBlue ? 'blue' : 'yellow'}`)
+          .attr(
+            'fill',
+            `${party1Count < numParty1 ? party1Color : party2Color}`
+          )
           .attr(
             'stroke',
-            `${indicesToAudit.includes(x * 10 + y) ? 'red' : 'grey'}`
+            `${indicesToAudit.includes(x * 10 + y) ? highlightColor : 'white'}`
           ); // make this red if it's one of the audited squares
-        blueCount++;
+        party1Count++;
       }
     }
 
@@ -59,8 +66,8 @@ function simulation1() {
         .attr('transform', `translate(${x * scale}, ${y * scale})`)
         .attr('width', scale)
         .attr('height', scale)
-        .attr('fill', `${x * 10 + y <= numBlue ? 'blue' : 'yellow'}`)
-        .attr('stroke', 'red')
+        .attr('fill', `${x * 10 + y <= numParty1 ? party1Color : party2Color}`)
+        .attr('stroke', highlightColor)
         .attr('stroke-width', '1.5');
     });
   }
@@ -70,7 +77,7 @@ function simulation1() {
     // adjust the text on the range slider
     d3.select('#vote-percentage-value').text(newPercentage);
     d3.select('#vote-percentage').property('value', newPercentage);
-    numBlue = newPercentage;
+    numParty1 = newPercentage;
 
     // update the rircle radius
     drawGrid(newPercentage, auditPercentage);
@@ -83,20 +90,20 @@ function simulation1() {
     d3.select('#audit-percentage').property('value', newPercentage);
     auditPercentage = newPercentage;
     // update the rircle radius
-    drawGrid(numBlue, newPercentage);
+    drawGrid(numParty1, newPercentage);
   }
 
   d3.select('#vote-percentage').on('input', function() {
     updateWinPercentage(+this.value);
   });
-  updateWinPercentage(numBlue);
+  updateWinPercentage(numParty1);
 
   d3.select('#audit-percentage').on('input', function() {
     updateAuditPercentage(+this.value);
   });
   updateAuditPercentage(auditPercentage);
 
-  drawGrid(numBlue, auditPercentage);
+  drawGrid(numParty1, auditPercentage);
 }
 
 function simulation2() {
@@ -104,10 +111,10 @@ function simulation2() {
   const min = 50;
   const max = 62;
   // Thus average count will be 14 if blue wins with 80%
-  const numBlue = 80; // random(min, max);
+  const numParty1 = 80; // random(min, max);
   let votes = concat(
-    fill(Array(numBlue), 'blue'),
-    fill(Array(100 - numBlue), 'yellow')
+    fill(Array(numParty1), 'blue'),
+    fill(Array(100 - numParty1), 'yellow')
   );
 
   // shufftle votes up
@@ -137,7 +144,7 @@ function simulation2() {
   let total = 1;
   const tolerance = 1; // generally, this is ignored in the simple calculations, this is equivalent to 1%
   // Will not work correctly if it is a tie
-  const winner = numBlue > 50 ? 'blue' : 'yellow';
+  const winner = numParty1 > 50 ? 'blue' : 'yellow';
   // To write the number of times it's been audited
   const runningTotal = [];
   while (total < 9.9) {
@@ -148,9 +155,9 @@ function simulation2() {
     const index = random(0, 101);
     const vote = votes[index];
     if (vote === winner) {
-      total *= (numBlue - tolerance) / 50;
+      total *= (numParty1 - tolerance) / 50;
     } else {
-      total *= (100 - (numBlue - tolerance)) / 50;
+      total *= (100 - (numParty1 - tolerance)) / 50;
     }
 
     runningTotal.push({ auditedVoteIndex: index, color: vote, total });
