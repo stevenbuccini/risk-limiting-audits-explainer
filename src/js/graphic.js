@@ -2,7 +2,7 @@
 import { concat, fill, random, shuffle, slice } from 'lodash';
 import noUiSlider from 'nouislider';
 
-function resize() { }
+function resize() {}
 
 const margin = { top: 20, right: 10, bottom: 20, left: 10 };
 const width = 640 - margin.left - margin.right;
@@ -95,12 +95,12 @@ function simulation1() {
     drawGrid(numParty1, newPercentage);
   }
 
-  d3.select('#vote-percentage').on('input', function () {
+  d3.select('#vote-percentage').on('input', function() {
     updateWinPercentage(+this.value);
   });
   updateWinPercentage(numParty1);
 
-  d3.select('#audit-percentage').on('input', function () {
+  d3.select('#audit-percentage').on('input', function() {
     updateAuditPercentage(+this.value);
   });
   updateAuditPercentage(auditPercentage);
@@ -170,11 +170,10 @@ function simulation2() {
   const n = runningTotal.length;
   const margin = { top: 50, right: 50, bottom: 50, left: 50 };
 
-
   const width = window.innerWidth - margin.left - margin.right; // Use the window's width
   const height = 500 - margin.top - margin.bottom; // Use the window's height
 
-  console.log(width, height)
+  console.log(width, height);
 
   const xScale = d3
     .scaleLinear()
@@ -188,15 +187,15 @@ function simulation2() {
 
   const line = d3
     .line()
-    .x(function (d, i) {
+    .x(function(d, i) {
       return xScale(i);
     }) // set the x values for the line generator
-    .y(function (d) {
+    .y(function(d) {
       return yScale(d.y);
     }) // set the y values for the line generator
     .curve(d3.curveMonotoneX); // apply smoothing to the line
 
-  const dataset = d3.range(runningTotal.length).map(function (d) {
+  const dataset = d3.range(runningTotal.length).map(function(d) {
     return { color: runningTotal[d].color, y: runningTotal[d].total };
   });
 
@@ -250,7 +249,6 @@ function simulation2() {
     .style('stroke-width', '5px')
     .text('threshold');
 
-
   let path;
   console.log(runningTotal);
   function renderUpToStep(idx) {
@@ -258,7 +256,6 @@ function simulation2() {
     if (path) path.remove();
     d3.selectAll('.dot').remove();
     d3.selectAll('.audited').remove();
-
 
     for (let i = 0; i < idx; i++) {
       const vote = runningTotal[i];
@@ -289,14 +286,14 @@ function simulation2() {
       .enter()
       .append('circle') // Uses the enter().append() method
       .attr('class', 'dot') // Assign a class for styling
-      .attr('cx', function (d, i) {
+      .attr('cx', function(d, i) {
         return xScale(i);
       })
-      .attr('cy', function (d) {
+      .attr('cy', function(d) {
         return yScale(d.y);
       })
-      .attr('r', 5)
-      .attr('fill', function (d) {
+      .attr('r', 10)
+      .attr('fill', function(d) {
         return d.color;
       });
   }

@@ -1,17 +1,17 @@
 {
-	"title": "Not So Risky Business",
-	"description": "Using Risk-Limiting Audits to Keep Elections Safe",
-	"site": "https://site.com",
-	"siteName": "",
-	"url": "https://site.com/year/month/name/",
-	"keywords": "tk",
-	"imgFacebook": "https://site.com/year/month/name/assets/social/social-facebook.jpg",
-	"imgTwitter": "https://site.com/year/month/name/assets/social/social-twitter.jpg",
-	"author": {
-		"name": "Steven Buccini",
-		"url": "",
-		"twitterHandle": "@stevenbuccini"
-	},
-	"analytics": "",
-	"lorem": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis neque sit amet sollicitudin vehicula. Maecenas fringilla mi non lacus mattis elementum. Curabitur dignissim faucibus justo."
+  "title": "Not So Risky Business",
+  "description": "Using Risk-Limiting Audits to Keep Elections Safe",
+  "site": "https://stevenbuccini.com",
+  "siteName": "",
+  "url": "https://site.com/year/month/name/",
+  "keywords": "tk",
+  "imgFacebook": "https://site.com/year/month/name/assets/social/social-facebook.jpg",
+  "imgTwitter": "https://site.com/year/month/name/assets/social/social-twitter.jpg",
+  "author": {
+    "name": "Steven Buccini",
+    "url": "https://stevenbuccini.com",
+    "twitterHandle": "@stevenbuccini"
+  },
+  "analytics": "",
+  "lorem": "Explaining what risk-limiting audits is, how it works, and how it differs from what we have today."
 }
