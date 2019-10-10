@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang='en' data-version='1570568988962'>
+<html lang='en' data-version='1570717208052'>
 
 <head>
 
@@ -606,16 +606,14 @@ Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{valu
 		<section id="intro" class="prose">
 		  <h2>Introduction</h2>
 		  <p>
-		    If programmers themselves joke about how hard it to count correctly, why do we turn over the most important count of them all -- counting the ballots after an election -- to machines? For all the obvious reasons: they work quickly, they never get tired, and they are never biased towards any particular party or platform. While computers might never make mistakes, the engineers who write the instructions they follow make mistakes all the time. And there are a myriad of environmental challenges that make perfect counts difficult such as dust blocking the optical sensors, power blips, and most dangerously of all, user error.
-		  </p>
+		    To err is human. Whether it’s quality control at a factory, sending a meal back to the kitchen, a robust return policy, or the human capacity to forgive, our society has developed a myriad of ways to catch and correct our mistakes.
 		
-		  <p>
-		    For this reason, many states have implemented mandatory post-election audits.
+		    Do we have an equivalent method to catch errors in our elections, whether malicious or otherwise? Turns out, we do: auditing! Today we’ll be exploring how we currently double-check our vote counts and new research that will make it easier than ever to keep our elections safe and secure.
 		  </p>
 		</section>
 		<section id="simulation1" class="prose">
 		  <h2>What we do now</h2>
-		  <p>Currently, <a href="http://www.ncsl.org/research/elections-and-campaigns/post-election-audits635926066.aspx">43 states and DC</a> require some type of post-election audit to ensure the accuracy of the initially reported tally. Of these states, the vast majority us a so-called "traditional" post-election audit. Typically, this means manually examining a specific precentage of the paper record produced by a ballot to ensure they match the counts produced by the voting system, which in many cases is electronic.</p>
+		  <p>Currently, <a href="http://www.ncsl.org/research/elections-and-campaigns/post-election-audits635926066.aspx">43 states and DC</a> require some type of post-election audit to ensure the accuracy of the initially reported tally. Of these states, the vast majority use a so-called "traditional" post-election audit. Typically, this means manually examining a specific percentage of the paper record produced by a ballot to ensure they match the counts produced by the voting system, which in many cases is electronic.</p>
 		
 		  <p>Below, we have simulated a traditional post-election audit. This is a simulated election between red and green where there were 100 ballots cast. You can fiddle with both the margin of victory and the percentage of ballots you'd like to manually check. Play around with the sliders to see what happens in different scenarios.</p>
 		
@@ -637,7 +635,7 @@ Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{valu
 		  </div>
 		
 		
-		  <p>Did you notice anything interesting? What happens if green wins in a landslide? Regardless of the margin of victory, <i>we always count the same number of votes.</i> That's not very clever! When one side wins in a blow-out, election administrators are legally obligated to count every last ballot required by law. Imagine doing this for a large state, like the state of California. Even if blue won by 99%, California counties would have to audit 1% of the total ballots cast -- that’s over 130,000 ballots to examine by hand if we use 2016 turnout numbers.
+		  <p>Did you notice anything interesting? What happens if green wins in a landslide? Regardless of the margin of victory, <i>we always count the same number of votes</i> in a percentage-based audit. That's not very clever! When one side wins in a blow-out, election administrators are legally obligated to count every last ballot required by law. Imagine doing this for a large state, like the state of California. Even if blue won by 99%, California counties would have to audit 1% of the total ballots cast -- that’s over 130,000 ballots to examine by hand if we use 2016 turnout numbers (13.7 million ballots cast).
 		</p>
 		
 		</section>
@@ -745,9 +743,7 @@ Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{valu
 		</section>
 		<section id="simulation3" class="prose">
 		  <h2>The Power of RLAs</h2>
-		  <p>First, we've explored how a traditional post-election audit worked. Next, we the procedures behind risk-limiting audits. Now, it's time to put them head to head. Here's where we'll see the true power of risk-limiting audits.</p>
-		
-		  <p>Below, we'll see how many ballots each approach will need to take. You'll be able to change two inputs: the number of votes cast in the contest and the margin of victory.</p>
+		  <p>Now that we’ve seen how each type of audit is conducted, it’s time to put them to the test. Here is where we’ll see the real power of risk-limiting audits. You’ll have three sliders at your disposal: the ability to determine the total number of votes cast, the margin of victory, and the percentage of votes to check for the traditional type of audit. Play around with the sliders. Do you notice anything interesting?</p>
 		
 		  <div id="simulation-control">
 		    <label for="ballots-cast-slider">
@@ -774,13 +770,16 @@ Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{valu
 		    <h2>Number of ballots audited by RLAs: <span id="rla-number"></span></h2>
 		  </div>
 		
+		  <p>
+		    Now, try moving the total ballots cast slider to the end, 14 million. Now, move the margin of victory slider to 11%. Finally, move the traditional audit percentage to 3. Congratulations! This represents the 2008 Presidential race in California, where Barack Obama won 61% of the 13.7 million votes cast. A risk limiting audit would need to check just 97 ballots to have 90% confidence that the given result is not wrong. Meanwhile, California law at the time required significantly more ballots to check -- 137,000, or 1% of the 13,700,000 total ballots cast. WIth significantly fewer ballots to check, election officials can spend their resources auditing other races further down the ballot and upgrading voting equipment.
+		  </p>
 		
 		</section>
 
 	</main>
 
 	<script src='assets/scripts/d3.v5.11.0.min.js'></script>
-	<script src='main.js?version=1570568988962' async></script>
+	<script src='main.js?version=1570717208052' async></script>
 </body>
 
 </html>
