@@ -360,6 +360,23 @@ function simulation3() {
     start: [100],
   });
 
+  function filterPips2(value, type) {
+    if (value % 10 === 0 || value === 1) {
+      return 1;
+    }
+    return 0;
+  }
+
+  function filterPips3(value, type) {
+    if (value % 10 === 0) {
+      return 1;
+    }
+    if (value % 5 === 0) {
+      return 2;
+    }
+    return 0;
+  }
+
   ballotNumSlider.noUiSlider.on('set', () => {
     document.getElementById('ballots-cast-num').textContent = Math.floor(
       ballotNumSlider.noUiSlider.get()
@@ -371,8 +388,9 @@ function simulation3() {
 
   noUiSlider.create(marginVictorySlider, {
     pips: {
-      mode: 'range',
+      mode: 'steps',
       density: 0,
+      filter: filterPips2,
     },
 
     range: {
@@ -380,6 +398,7 @@ function simulation3() {
       max: [50],
     },
     start: [9],
+    step: 1,
   });
 
   marginVictorySlider.noUiSlider.on('set', () => {
@@ -395,8 +414,9 @@ function simulation3() {
 
   noUiSlider.create(traditionalAuditSlider, {
     pips: {
-      mode: 'range',
+      mode: 'steps',
       density: 0,
+      filter: filterPips3,
     },
 
     range: {
