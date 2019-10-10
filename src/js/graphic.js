@@ -202,17 +202,20 @@ function simulation2() {
 
   const slider = document.getElementById('simulation2-stepper');
 
+  function filterPips(value, type) {
+    return 1;
+  }
   noUiSlider.create(slider, {
     pips: {
-      mode: 'values',
-      values: d3.range(runningTotal.length + 1),
-      density: 0,
+      mode: 'steps',
+      density: -1,
+      filter: filterPips,
     },
     range: {
       min: [0],
       max: [runningTotal.length],
     },
-    start: [0],
+    start: 0,
     step: 1,
   });
 
