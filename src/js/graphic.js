@@ -1,5 +1,5 @@
 /* global d3 */
-import { concat, fill, random, shuffle, slice } from 'lodash';
+import { concat, each, fill, random, shuffle, slice } from 'lodash';
 import noUiSlider from 'nouislider';
 
 function resize() {}
@@ -178,7 +178,7 @@ function simulation2() {
 
   const xScale = d3
     .scaleLinear()
-    .domain([0, n - 1]) // input
+    .domain([1, n]) // input
     .range([0, width]); // output
 
   const yScale = d3
@@ -189,7 +189,7 @@ function simulation2() {
   const line = d3
     .line()
     .x(function(d, i) {
-      return xScale(i);
+      return xScale(i + 1);
     }) // set the x values for the line generator
     .y(function(d) {
       return yScale(d.y);
@@ -235,7 +235,13 @@ function simulation2() {
     .append('g')
     .attr('class', 'x axis')
     .attr('transform', `translate(0,${height})`)
-    .call(d3.axisBottom(xScale));
+    .call(
+      d3
+        .axisBottom(xScale)
+        .tickFormat(d3.format('d'))
+        .ticks(dataset.length - 1)
+      // .tickSubdivide(0)
+    );
 
   svg
     .append('text')
@@ -253,7 +259,6 @@ function simulation2() {
     .append('text')
     .attr('transform', 'rotate(-90)')
     .attr('x', `${0 - height / 2}`)
-    .attr('y', `${0 - 100}}`)
     .style('text-anchor', 'middle')
     .attr('dy', '-1.5em')
     .text('Score');
@@ -304,12 +309,18 @@ function simulation2() {
         .attr('stroke', highlightColor)
         .attr('stroke-width', '4');
     }
+
+    const manipulatedData = {};
+    each(slice(dataset, 0, idx), (val, idx) => {
+      manipulatedData[idx] = val;
+    });
     path = svg
       .append('path')
       .datum(slice(dataset, 0, idx)) // 10. Binds data to the line
       .attr('class', 'line') // Assign a class for styling
       .attr('d', line) // 11. Calls the line generator
       .attr('color', textColor);
+
     svg
       .selectAll('.dot')
       .data(slice(dataset, 0, idx))
@@ -317,7 +328,7 @@ function simulation2() {
       .append('circle') // Uses the enter().append() method
       .attr('class', 'dot') // Assign a class for styling
       .attr('cx', function(d, i) {
-        return xScale(i);
+        return xScale(i + 1);
       })
       .attr('cy', function(d) {
         return yScale(d.y);
