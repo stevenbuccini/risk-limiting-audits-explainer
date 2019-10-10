@@ -152,7 +152,7 @@ function simulation2() {
   const runningTotal = [];
   while (total < 9.9) {
     if (total < 0.011) {
-      console.log('manal recount required');
+      alert('manal recount required');
       break;
     }
     const index = random(0, 100);
@@ -235,9 +235,25 @@ function simulation2() {
     .call(d3.axisBottom(xScale));
 
   svg
+    .append('text')
+    .attr('x', `${width / 2}`)
+    .attr('y', `${height + 50}`)
+    .style('text-anchor', 'middle')
+    .text('Number of ballots audited');
+
+  svg
     .append('g')
     .attr('class', 'y axis')
     .call(d3.axisLeft(yScale));
+
+  svg
+    .append('text')
+    .attr('transform', 'rotate(-90)')
+    .attr('x', `${0 - height / 2}`)
+    .attr('y', `${0 - 100}}`)
+    .style('text-anchor', 'middle')
+    .attr('dy', '-1.5em')
+    .text('Score');
 
   // Add threshold
   // https://codepen.io/dannyhc/pen/WQdmwa
@@ -249,6 +265,15 @@ function simulation2() {
     .style('stroke', bodyColor)
     .style('stroke-width', '5px')
     .text('threshold');
+
+  // svg
+  //   .append('g')
+  //   .attr('transform', `translate(0, ${yScale(0.011)})`)
+  //   .append('line')
+  //   .attr('x2', width)
+  //   .style('stroke', highlightColor)
+  //   .style('stroke-width', '1px')
+  //   .text('threshold');
 
   let path;
   function renderUpToStep(idx) {
