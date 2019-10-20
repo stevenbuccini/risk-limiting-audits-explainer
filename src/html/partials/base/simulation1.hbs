@@ -1,29 +1,40 @@
-<section id="simulation1" class="prose">
+<section id="simulation1">
   <h2>What we do now</h2>
-  <p>Currently, <a href="http://www.ncsl.org/research/elections-and-campaigns/post-election-audits635926066.aspx">43 states and DC</a> require some type of post-election audit to ensure the accuracy of the initially reported tally. Of these states, the vast majority use a so-called "traditional" post-election audit. Typically, this means manually examining a specific percentage of the paper record produced by a ballot to ensure they match the counts produced by the voting system, which in many cases is electronic.</p>
+  <p>Currently, <a href="http://www.ncsl.org/research/elections-and-campaigns/post-election-audits635926066.aspx">43
+      states and DC</a> require some type of post-election audit to ensure the accuracy of the initially reported tally.
+    Of these states, the vast majority use a so-called "traditional" post-election audit. Typically, this means manually
+    examining a specific percentage of the paper record produced by a ballot to ensure they match the counts produced by
+    the voting system, which in many cases is electronic.</p>
 
-  <p>Below, we have simulated a traditional post-election audit. This is a simulated election between red and green where there were 100 ballots cast. You can fiddle with both the margin of victory and the percentage of ballots you'd like to manually check. Play around with the sliders to see what happens in different scenarios.</p>
+  <p>Below, we have simulated a traditional post-election audit. This is a simulated election between red and green
+    where there were 100 ballots cast. You can fiddle with both the margin of victory and the percentage of ballots
+    you'd like to manually check. Play around with the sliders to see what happens in different scenarios.</p>
 
-  <div id="simulation1-container">
+  {{!-- <div id="simulation1-container">
     <svg id="simulation1-svg" viewbox="0 0 100 100" style="background:white"></svg>
 
     {{!--  replace with  noUIslider import noUiSlider from 'nouislider' --}}
-    <div id="simulation1-controls">
-      <label for="vote-percentage">
-        blue % of vote: = <span id="vote-percentage-value">…</span>
-      </label>
-      <input type="range" min="0" max="100" id="vote-percentage">
-      <br>
-      <label for="audit-percentage">
-        % of ballots to audit: = <span id="audit-percentage-value">…</span>
-      </label>
-      <input type="range" min="0" max="100" id="audit-percentage">
-    </div>
-
+  <div id="simulation1-controls">
+    <label for="vote-percentage">
+      blue % of vote: = <span id="vote-percentage-value">…</span>
+    </label>
+    <input type="range" min="0" max="100" id="vote-percentage">
+    <br>
+    <label for="audit-percentage">
+      % of ballots to audit: = <span id="audit-percentage-value">…</span>
+    </label>
+    <input type="range" min="0" max="100" id="audit-percentage">
   </div>
 
+  </div> --}}
 
-  <p>Did you notice anything interesting? What happens if green wins in a landslide? Regardless of the margin of victory, <i>we always count the same number of votes</i> in a percentage-based audit. That's not very clever! When one side wins in a blow-out, election administrators are legally obligated to count every last ballot required by law. Imagine doing this for a large state, like the state of California. Even if blue won by 99%, California counties would have to audit 1% of the total ballots cast -- that’s over 130,000 ballots to examine by hand if we use 2016 turnout numbers (13.7 million ballots cast).
-</p>
+
+  <p>Did you notice anything interesting? What happens if green wins in a landslide? Regardless of the margin of
+    victory, <i>we always count the same number of votes</i> in a percentage-based audit. That's not very clever! When
+    one side wins in a blow-out, election administrators are legally obligated to count every last ballot required by
+    law. Imagine doing this for a large state, like the state of California. Even if blue won by 99%, California
+    counties would have to audit 1% of the total ballots cast -- that’s over 130,000 ballots to examine by hand if we
+    use 2016 turnout numbers (13.7 million ballots cast).
+  </p>
 
 </section>

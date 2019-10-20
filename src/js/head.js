@@ -5,3 +5,6 @@ import './polyfills/endsWith';
 import './polyfills/findIndex';
 import './polyfills/find';
 import './polyfills/includes';
+import Reveal from './reveal'
+
+window.Reveal = Reveal;

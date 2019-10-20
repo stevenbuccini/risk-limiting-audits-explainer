@@ -1,7 +1,7 @@
 /* global d3 */
 import debounce from 'lodash.debounce';
 import isMobile from './utils/is-mobile';
-import graphic from './graphic';
+// import graphic from './graphic';
 // import footer from './footer';
 
 const $body = d3.select('body');
@@ -13,22 +13,22 @@ function resize() {
   const width = $body.node().offsetWidth;
   if (previousWidth !== width) {
     previousWidth = width;
-    graphic.resize();
+    //graphic.resize();
   }
 }
 
-function setupStickyHeader() {
-  const $header = $body.select('header');
-  if ($header.classed('is-sticky')) {
-    const $menu = $body.select('.header__menu');
-    const $toggle = $body.select('.header__toggle');
-    $toggle.on('click', () => {
-      const visible = $menu.classed('is-visible');
-      $menu.classed('is-visible', !visible);
-      $toggle.classed('is-visible', !visible);
-    });
-  }
-}
+// function setupStickyHeader() {
+//   const $header = $body.select('header');
+//   if ($header.classed('is-sticky')) {
+//     const $menu = $body.select('.header__menu');
+//     const $toggle = $body.select('.header__toggle');
+//     $toggle.on('click', () => {
+//       const visible = $menu.classed('is-visible');
+//       $menu.classed('is-visible', !visible);
+//       $toggle.classed('is-visible', !visible);
+//     });
+//   }
+// }
 
 function init() {
   // add mobile class to body tag
@@ -38,7 +38,7 @@ function init() {
   // setup sticky header menu
   // setupStickyHeader();
   // kick off graphic code
-  graphic.init();
+  // graphic.init();
   // load footer stories
   // footer.init();
 }

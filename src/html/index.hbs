@@ -6,6 +6,8 @@
 	{{> base/meta}}
 
 	<link inline rel='stylesheet' href='bundle.css' />
+	{{!-- <link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/reveal.css"> --}}
 	<link href="https://fonts.googleapis.com/css?family=Chivo&display=swap" rel="stylesheet">
 
 
@@ -47,17 +49,31 @@
 
 <body>
 	<main id='content'>
-
-		{{> story/intro }}
-		{{> story/feature-lede}}
-		{{> base/simulation1 }}
-		{{> base/simulation2 }}
-		{{> base/simulation3 }}
-		{{> story/outro }}
+		<div class="reveal">
+			<div class="slides">
+				{{!-- {{> story/intro }} --}}
+				{{> story/feature-lede}}
+				{{!-- {{> base/simulation1 }} --}}
+				{{!-- {{> base/simulation2 }}
+				{{> base/simulation3 }} --}}
+				{{> story/outro }}
+			</div>
+		</div>
 	</main>
 
 	<script src='{{basepath}}assets/scripts/d3.v5.11.0.min.js'></script>
 	<script src='main.js?version={{timestamp}}' async></script>
+
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		(function () {
+			// your page initialization code here
+			// the DOM will be available here
+			Reveal.initialize();
+		})()
+	</script>
 </body>
 
 </html>
