@@ -6,29 +6,34 @@
     examining a specific percentage of the paper record produced by a ballot to ensure they match the counts produced by
     the voting system, which in many cases is electronic.</p>
 
-  <p>Below, we have simulated a traditional post-election audit. This is a simulated election between red and green
+  <p>On the next page, we will simulate a traditional post-election audit. This is a simulated election between red and
+    green
     where there were 100 ballots cast. You can fiddle with both the margin of victory and the percentage of ballots
     you'd like to manually check. Play around with the sliders to see what happens in different scenarios.</p>
+</section>
 
-  {{!-- <div id="simulation1-container">
+<section>
+  <div id="simulation1-container">
     <svg id="simulation1-svg" viewbox="0 0 100 100" style="background:white"></svg>
 
     {{!--  replace with  noUIslider import noUiSlider from 'nouislider' --}}
-  <div id="simulation1-controls">
-    <label for="vote-percentage">
-      blue % of vote: = <span id="vote-percentage-value">…</span>
-    </label>
-    <input type="range" min="0" max="100" id="vote-percentage">
-    <br>
-    <label for="audit-percentage">
-      % of ballots to audit: = <span id="audit-percentage-value">…</span>
-    </label>
-    <input type="range" min="0" max="100" id="audit-percentage">
+    <div id="simulation1-controls">
+      <label for="vote-percentage">
+        blue % of vote: = <span id="vote-percentage-value">…</span>
+      </label>
+      <input type="range" min="0" max="100" id="vote-percentage">
+      <br>
+      <label for="audit-percentage">
+        % of ballots to audit: = <span id="audit-percentage-value">…</span>
+      </label>
+      <input type="range" min="0" max="100" id="audit-percentage">
+    </div>
+
   </div>
+</section>
 
-  </div> --}}
 
-
+<section>
   <p>Did you notice anything interesting? What happens if green wins in a landslide? Regardless of the margin of
     victory, <i>we always count the same number of votes</i> in a percentage-based audit. That's not very clever! When
     one side wins in a blow-out, election administrators are legally obligated to count every last ballot required by
@@ -36,5 +41,4 @@
     counties would have to audit 1% of the total ballots cast -- that’s over 130,000 ballots to examine by hand if we
     use 2016 turnout numbers (13.7 million ballots cast).
   </p>
-
 </section>

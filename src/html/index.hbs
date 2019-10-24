@@ -5,7 +5,7 @@
 
 	{{> base/meta}}
 
-	<link inline rel='stylesheet' href='bundle.css' />
+	<link inline rel='stylesheet' href='bundle.css' id="theme" />
 	<link href="https://fonts.googleapis.com/css?family=Chivo&display=swap" rel="stylesheet">
 
 
@@ -48,15 +48,13 @@
 <body>
 	<main class="content reveal">
 		<div class="slides">
-			<section>One two three</section>
-			<section>four five six</section>
 
-			{{!-- {{> story/intro }} --}}
-			{{!-- {{> story/feature-lede}}
-				{{> base/simulation1 }}
-				{{> base/simulation2 }}
-				{{> base/simulation3 }}
-				{{> story/outro }} --}}
+			{{> story/intro }}
+			{{> story/feature-lede}}
+			{{> base/simulation1 }}
+			{{> base/simulation2 }}
+			{{> base/simulation3 }}
+			{{> story/outro }}
 		</div>
 	</main>
 
@@ -70,7 +68,11 @@
 		(function () {
 			// your page initialization code here
 			// the DOM will be available here
-			Reveal.initialize();
+			Reveal.initialize({
+				slideNumber: true,
+				hash: true,
+				hideInactiveCursor: false,
+			});
 		})()
 	</script>
 </body>
