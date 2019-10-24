@@ -60,7 +60,7 @@
 		"deploy:html": "node ./scripts/html.js",
 		"watch:assets": "onchange -k 'src/assets/**/*' -- run-s build:assets",
 		"watch:html": "onchange 'src/html/**/*' 'data/*/' -- run-s build:html",
-		"watch:css": "stylus src/css/config.styl --include-css -o dev/bundle.css -m -w",
+		"watch:css": "stylus src/css/config.styl --include-css  -o dev/bundle.css -m -w",
 		"watch:js": "parcel watch src/js/main.js src/js/head.js --out-dir dev --no-hmr",
 		"serve": "light-server -q -o -s dev -p 4000 -w 'dev/*.css # # reloadcss' -w 'dev/*.js # #' -w 'dev/*.html # #' -w 'dev/assets/**/* # #'",
 		"dev": "run-p serve watch:*",
