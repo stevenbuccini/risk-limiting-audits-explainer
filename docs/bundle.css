@@ -1907,7 +1907,7 @@ html * {
  *********************************************/
 body {
   background: #fdf6e3;
-  background-color: #fdf6e3; }
+  background-color: blue; }
 
 .reveal {
   font-family: "Lato", sans-serif;
