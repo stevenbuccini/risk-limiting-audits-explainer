@@ -2,6 +2,7 @@
 import debounce from 'lodash.debounce';
 import isMobile from './utils/is-mobile';
 import graphic from './graphic';
+import Reveal from './Reveal';
 // import footer from './footer';
 
 const $body = d3.select('body');
@@ -34,7 +35,10 @@ function init() {
   // add mobile class to body tag
   $body.classed('is-mobile', isMobile.any());
   // setup resize event
-  window.addEventListener('resize', debounce(resize, 150));
+  // window.addEventListener('resize', debounce(resize, 150));
+  Reveal.addEventListener('resize', () => {
+    debounce(resize, 150)
+  });
   // setup sticky header menu
   // setupStickyHeader();
   // kick off graphic code
