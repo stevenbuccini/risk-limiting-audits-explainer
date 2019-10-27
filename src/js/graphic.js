@@ -36,6 +36,7 @@ function simulation1() {
   let auditPercentage = 3;
 
   function drawGrid(numParty1, auditPercentage) {
+    console.log('going!');
     root.selectAll('*').remove();
     let party1Count = 0;
     const indicesToAudit = [];
@@ -45,6 +46,7 @@ function simulation1() {
     }
     for (let x = 0; x < 10; x++) {
       for (let y = 0; y < 10; y++) {
+        console.log('root render', root)
         root
           .append('rect')
           .attr('transform', `translate(${x * scale}, ${y * scale})`)
