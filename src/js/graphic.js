@@ -177,7 +177,9 @@ function simulation2() {
     document.getElementById('running-total-container').offsetWidth -
     margin.left -
     margin.right; // Use the window's width
-  const height = 500 - margin.top - margin.bottom; // Use the window's height
+  const height = window.innerHeight - document.getElementById('simulation2-container').clientHeight - document.getElementById('simulation2-stepper').clientHeight;
+
+  console.log('height', height)
 
   const xScale = d3
     .scaleLinear()
