@@ -177,7 +177,7 @@ function simulation2() {
     document.getElementById('running-total-container').offsetWidth -
     margin.left -
     margin.right; // Use the window's width
-  const height = window.innerHeight - document.getElementById('simulation2-container').clientHeight - document.getElementById('simulation2-stepper').clientHeight;
+  const height = window.innerHeight - document.getElementById('simulation2-container').clientHeight - document.getElementById('slider-container').clientHeight;
 
   console.log('height', height)
 
@@ -210,24 +210,29 @@ function simulation2() {
   function filterPips(value, type) {
     return 1;
   }
-  noUiSlider.create(slider, {
-    pips: {
-      mode: 'steps',
-      density: -1,
-      filter: filterPips,
-    },
-    range: {
-      min: [0],
-      max: [runningTotal.length],
-    },
-    start: 0,
-    step: 1,
-  });
 
-  slider.noUiSlider.on('slide', () => {
-    renderUpToStep(Math.floor(slider.noUiSlider.get()));
-  });
+  if (slider.noUiSlider === undefined) {
+    noUiSlider.create(slider, {
+      pips: {
+        mode: 'steps',
+        density: -1,
+        filter: filterPips,
+      },
+      range: {
+        min: [0],
+        max: [runningTotal.length],
+      },
+      start: 0,
+      step: 1,
+    });
+    slider.noUiSlider.on('slide', () => {
+      renderUpToStep(Math.floor(slider.noUiSlider.get()));
+    });
+  }
 
+
+
+  d3.select('#running-total-container > svg').remove();
   const svg = d3
     .select('#running-total-container')
     .append('svg')
@@ -483,4 +488,4 @@ function simulation3() {
     document.getElementById('rla-number').textContent = count.toString();
   }
 }
-export default { init, resize };
+export default { init, resize, simulation2 };

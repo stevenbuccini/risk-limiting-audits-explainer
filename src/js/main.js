@@ -35,9 +35,18 @@ function init() {
   // add mobile class to body tag
   $body.classed('is-mobile', isMobile.any());
   // setup resize event
-  // window.addEventListener('resize', debounce(resize, 150));
+  window.addEventListener('resize', debounce(resize, 150));
   Reveal.addEventListener('resize', () => {
     debounce(resize, 150)
+  });
+
+  Reveal.addEventListener('slidechanged', function (event) {
+    // event.previousSlide, event.currentSlide, event.indexh, event.indexv
+
+    // Manually refire render to get height calculations to work
+    if (event.indexh === 7) {
+      graphic.simulation2();
+    }
   });
   // setup sticky header menu
   // setupStickyHeader();
