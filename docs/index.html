@@ -1,16 +1,16 @@
 <!doctype html>
-<html lang='en' data-version='1572216304495'>
+<html lang='en' data-version='1572351074062'>
 
 <head>
 
-	<title>Not So Risky Business</title>
+	<title>Not-So-Risky Business</title>
 	<meta charset='utf-8'>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
 	<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 	<meta name='description' content='Using Risk-Limiting Audits to Keep Elections Safe' />
 	<meta name='news_keywords' content='tk' />
 	
-	<meta property='og:title' content='Not So Risky Business' />
+	<meta property='og:title' content='Not-So-Risky Business' />
 	<meta property='og:site_name' content='' />
 	<meta property='og:url' content='https://site.com/year/month/name/' />
 	<meta property='og:description' content='Using Risk-Limiting Audits to Keep Elections Safe' />
@@ -25,7 +25,7 @@
 	<meta name='twitter:card' content='summary_large_image' />
 	<meta name='twitter:site' content='https://stevenbuccini.com' />
 	<meta name='twitter:creator' content='@stevenbuccini' />
-	<meta name='twitter:title' content='Not So Risky Business' />
+	<meta name='twitter:title' content='Not-So-Risky Business' />
 	<meta name='twitter:description' content='Using Risk-Limiting Audits to Keep Elections Safe' />
 	<meta name='twitter:image:src' content='https://site.com/year/month/name/assets/social/social-twitter.jpg' />
 	
@@ -342,7 +342,7 @@ transform: translate(0, -50%);
 top: 50%;
 right: 120%;
 }
-.slider.noUi-target{box-shadow:none;border:none;background-color:transparent}.slider.noUi-horizontal{cursor:pointer;height:20px;background:transparent}.slider.noUi-horizontal .noUi-base{height:100%}.slider.noUi-horizontal .noUi-base:after{content:'';display:block;width:100%;height:2px;background:#282828;top:50%;position:absolute;border-radius:2px}.slider.noUi-horizontal .noUi-handle{outline:none;width:20px;height:20px;left:10px;top:0;border:2px solid #282828;background-color:#282828;border-radius:50%;box-shadow:none;cursor:pointer}.slider.noUi-horizontal .noUi-handle:before{display:none}.slider.noUi-horizontal .noUi-handle:after{display:none}.slide-content{background-color:#fff;font-family:'Work Sans',sans-serif;padding:25px}.slide-content h2{font-size:20px;font-family:'Chivo',sans-serif}.slide-content p{font-size:16px;text-align:left}
+.slider.noUi-target{box-shadow:none;border:none;background-color:transparent}.slider.noUi-horizontal{cursor:pointer;height:20px;background:transparent}.slider.noUi-horizontal .noUi-base{height:100%}.slider.noUi-horizontal .noUi-base:after{content:'';display:block;width:100%;height:2px;background:#282828;top:50%;position:absolute;border-radius:2px}.slider.noUi-horizontal .noUi-handle{outline:none;width:20px;height:20px;left:10px;top:0;border:2px solid #282828;background-color:#282828;border-radius:50%;box-shadow:none;cursor:pointer}.slider.noUi-horizontal .noUi-handle:before{display:none}.slider.noUi-horizontal .noUi-handle:after{display:none}.intro{position:fixed;top:0;left:0;text-align:left !important;padding:3rem 2rem 3rem 2rem;color:#47467a !important}.intro__hed{font-size:72px;font-weight:bolder}.intro__dek{max-width:60rem;font-size:36px;margin-top:2rem}.intro__byline{max-width:60rem;margin:0 auto;margin-top:2rem}.intro__byline a{color:#47467a !important;border-bottom:2px solid #47467a}.overflow{position:static}.slide-content{background-color:#fff;color:#47467a;font-family:'Work Sans',sans-serif;padding:25px}@media only screen and (min-width:50em){.slide-content{width:50%;margin:0 auto}}.slide-content h2{font-size:20px;font-family:'Chivo',sans-serif}.slide-content p{font-size:16px;text-align:left}#simulation2-container{display:flex;flex-wrap:wrap}#simulation2-container .precinct-container{width:20%}#slider-container{margin-bottom:25px}
 /*!
 * reveal.js
 * http://revealjs.com
@@ -2245,18 +2245,18 @@ var e;function t(e){return(t="function"==typeof Symbol&&"symbol"==typeof Symbol.
 		<div class="slides">
 
 			<section data-background="assets/images/slide_backgrounds/slide1.png">
-				<div class='intro'>
-					<h1 class='intro__hed'>Not So Risky Business</h1>
+				<div class='stretch intro'>
+					<h1 class='intro__hed'>Not-So-Risky Business</h1>
 					<h2 class='intro__dek'>Using Risk-Limiting Audits to Keep Elections Safe</h2>
 					<h2 class='intro__byline'>By
 						<a href='https://stevenbuccini.com' target='_blank'>
-							<strong>Steven Buccini</strong>
+							Steven Buccini
 						</a>
 					</h2>
-					<time class='intro__time'>Summer 2019</time>
 				</div>
+			
 			</section>
-			<section id="intro" data-background="assets/images/slide_backgrounds/slide2.png">
+			<section id="intro" class="center" data-background="assets/images/slide_backgrounds/slide2.png">
 			  <div class="slide-content">
 			    <h2>Introduction</h2>
 			    <p>
@@ -2272,22 +2272,28 @@ var e;function t(e){return(t="function"==typeof Symbol&&"symbol"==typeof Symbol.
 			    </p>
 			  </div>
 			</section>
-			<section id="simulation1">
-			  <h2>What we do now</h2>
-			  <p>Currently, <a href="http://www.ncsl.org/research/elections-and-campaigns/post-election-audits635926066.aspx">43
-			      states and DC</a> require some type of post-election audit to ensure the accuracy of the initially reported tally.
-			    Of these states, the vast majority use a so-called "traditional" post-election audit. Typically, this means manually
-			    examining a specific percentage of the paper record produced by a ballot to ensure they match the counts produced by
-			    the voting system, which in many cases is electronic.</p>
+			<section id="status-quo" class="center" data-background="assets/images/slide_backgrounds/slide3.png">
+			  <div class="slide-content">
+			    <h2>What we do now</h2>
+			    <p>Currently, <a href="http://www.ncsl.org/research/elections-and-campaigns/post-election-audits635926066.aspx">43
+			        states and DC</a> require some type of post-election audit to ensure the accuracy of the initially reported
+			      tally.
+			      Of these states, the vast majority use a so-called "traditional" post-election audit. Typically, this means
+			      manually
+			      examining a specific percentage of the paper record produced by a ballot to ensure they match the counts produced
+			      by
+			      the voting system, which in many cases is electronic.</p>
 			
-			  <p>On the next page, we will simulate a traditional post-election audit. This is a simulated election between red and
-			    green
-			    where there were 100 ballots cast. You can fiddle with both the margin of victory and the percentage of ballots
-			    you'd like to manually check. Play around with the sliders to see what happens in different scenarios.</p>
+			    <p>On the next page, we will simulate a traditional post-election audit. This is a simulated election between red
+			      and
+			      green
+			      where there were 100 ballots cast. You can fiddle with both the margin of victory and the percentage of ballots
+			      you'd like to manually check. Play around with the sliders to see what happens in different scenarios.</p>
+			  </div>
 			</section>
 			
-			<section>
-			  <div id="simulation1-container">
+			<section id="current-audit-simulation">
+			  <div id="simulation1-container" class="stretch">
 			    <svg id="simulation1-svg" viewbox="0 0 100 100" style="background:white"></svg>
 			
 			    <div id="simulation1-controls">
@@ -2353,15 +2359,16 @@ var e;function t(e){return(t="function"==typeof Symbol&&"symbol"==typeof Symbol.
 			
 			<section>
 			
-			
-			  <label for="simulation2-stepper">Number of votes audited:</label>
-			  <div id="simulation2-stepper"></div>
+			  <div id="slider-container">
+			    <label for="simulation2-stepper">Number of votes audited:</label>
+			    <div id="simulation2-stepper"></div>
+			  </div>
 			
 			  <div id='simulation2-container'>
 			
 			    <div class="precinct-container">
 			      <p>Precinct 1</p>
-			      <svg id="precinct1" viewBox="0 0 110 20" style="background:white"></svg>
+			      <svg id="precinct1" viewBox="0 0 110 20" preserveAspectRatio="xMidYMid meet" style="background:white"></svg>
 			    </div>
 			
 			    <div class="precinct-container">
@@ -2500,7 +2507,7 @@ var e;function t(e){return(t="function"==typeof Symbol&&"symbol"==typeof Symbol.
 	</main>
 
 	<script src='assets/scripts/d3.v5.11.0.min.js'></script>
-	<script src='main.js?version=1572216304495' async></script>
+	<script src='main.js?version=1572351074062' async></script>
 
 	<script>
 		// More info about config & dependencies:
@@ -2513,6 +2520,13 @@ var e;function t(e){return(t="function"==typeof Symbol&&"symbol"==typeof Symbol.
 				slideNumber: true,
 				hash: true,
 				hideInactiveCursor: false,
+				// for custom CSS
+				width: "100%",
+				height: "100%",
+				margin: 0,
+				minScale: 1,
+				maxScale: 1,
+				center: false,
 			});
 		})()
 	</script>
