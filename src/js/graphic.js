@@ -1,6 +1,7 @@
 /* global d3 */
 import { concat, each, fill, random, shuffle, slice } from 'lodash';
 import noUiSlider from 'nouislider';
+import { removeAllListeners } from 'cluster';
 
 function resize() { }
 
@@ -177,7 +178,7 @@ function simulation2() {
     document.getElementById('running-total-container').offsetWidth -
     margin.left -
     margin.right; // Use the window's width
-  const height = window.innerHeight - document.getElementById('simulation2-container').clientHeight - document.getElementById('slider-container').clientHeight;
+  const height = window.innerHeight - document.getElementById('simulation2-container').clientHeight - document.getElementById('slider-container').clientHeight - 200;
 
   console.log('height', height)
 
