@@ -24,7 +24,6 @@ function init() {
 function simulation1() {
   const scale = 10;
   const root = d3.select('#simulation1 svg');
-  console.log("root", root)
   // .attr("width", width + margin.left + margin.right)
   // .attr("height", height + margin.top + margin.bottom)
   // .append("g")
@@ -37,7 +36,6 @@ function simulation1() {
   let auditPercentage = 3;
 
   function drawGrid(numParty1, auditPercentage) {
-    console.log('going!');
     root.selectAll('*').remove();
     let party1Count = 0;
     const indicesToAudit = [];
@@ -47,7 +45,6 @@ function simulation1() {
     }
     for (let x = 0; x < 10; x++) {
       for (let y = 0; y < 10; y++) {
-        console.log('root render', root)
         root
           .append('rect')
           .attr('transform', `translate(${x * scale}, ${y * scale})`)
@@ -179,8 +176,6 @@ function simulation2() {
     margin.left -
     margin.right; // Use the window's width
   const height = window.innerHeight - document.getElementById('simulation2-container').clientHeight - document.getElementById('slider-container').clientHeight - 200;
-
-  console.log('height', height)
 
   const xScale = d3
     .scaleLinear()
@@ -464,7 +459,6 @@ function simulation3() {
 
     // shufftle votes up
     votes = shuffle(votes);
-    console.log(votes);
 
     let total = 1;
     const tolerance = 1; // generally, this is ignored in the simple calculations, this is equivalent to 1%

@@ -42,22 +42,17 @@ function init() {
 
   Reveal.addEventListener('slidechanged', function (event) {
     // event.previousSlide, event.currentSlide, event.indexh, event.indexv
-    console.log('changed');
-    console.log('===================')
-    console.log(event.indexh)
     // Manually refire render to get height calculations to work
     if (event.indexh === 7) {
       graphic.simulation2();
     }
     if (event.indexh >= 1) {
-      console.log('test')
       Reveal.configure({
         // Vertical centering of slides
         // Set back to true after title slide
         center: true,
       });
     } else {
-      console.log('boo')
       Reveal.configure({
         // Vertical centering of slides
         // Set back to true after title slide
