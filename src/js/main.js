@@ -37,7 +37,7 @@ function init() {
   // setup resize event
   window.addEventListener('resize', debounce(resize, 150));
   Reveal.addEventListener('resize', () => {
-    debounce(resize, 150)
+    debounce(resize, 150);
   });
 
   Reveal.addEventListener('slidechanged', function (event) {

@@ -10,21 +10,21 @@
 //  font-size: 18px;
 //  line-height: 2;
 // }
-set-type-class(scale, lh = false)
-    if scale in $type-size
-        .{scale}
-            font-size: $type-size[scale].size
-            if lh == true
-                line-height: $type-size[scale].line-height
-    
-    else if scale == all
-        for scale in $type-size
-            .{scale}
-                font-size: $type-size[scale].size
-                if lh == true
-                    line-height: $type-size[scale].line-height
-    else
-        error('Not a defined type scale')
+// set-type-class(scale, lh = false)
+//    if scale in $type-size
+//        .{scale}
+//            font-size: $type-size[scale].size
+//            if lh == true
+//                line-height: $type-size[scale].line-height
+//    
+//    else if scale == all
+//        for scale in $type-size
+//            .{scale}
+//                font-size: $type-size[scale].size
+//                if lh == true
+//                    line-height: $type-size[scale].line-height
+//    else
+//        error('Not a defined type scale')
 
 // Function will output a font-size within a selector
 // Toggle lineheight with 'lh'
@@ -69,10 +69,10 @@ clearfix()
 // LIST STYLES
 // -------------------
 // Default is none
-list-style(type = none)
-	list-style-type type
-	margin 0
-	padding 0
+//list-style(type = none)
+//  list-style-type type
+	// margin 0
+	// padding 0
 	
 // -------------------
 // GRIDS

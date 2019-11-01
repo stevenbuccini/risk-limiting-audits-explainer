@@ -201,7 +201,6 @@ function simulation2() {
     margin.right; // Use the window's width
   const height = window.innerHeight - document.getElementById('simulation2-container').clientHeight - document.getElementById('slider-container').clientHeight - 200;
 
-  console.log('render 2', height)
 
   const xScale = d3
     .scaleLinear()
@@ -291,7 +290,6 @@ function simulation2() {
 
   let path;
   function renderUpToStep(idx) {
-    console.log('stepped')
     // clear previous line segments and circles
     if (path) path.remove();
     d3.selectAll('.dot').remove();
@@ -322,7 +320,6 @@ function simulation2() {
       manipulatedData[idx] = val;
     });
 
-    console.log(path)
 
     path = svg
       .append('path')
