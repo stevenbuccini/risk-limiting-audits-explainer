@@ -23,7 +23,7 @@ function init() {
 
 function simulation1() {
   const scale = 10;
-  const root = d3.select('#simulation1 svg');
+  const root = d3.select('#simulation1-svg');
   // .attr("width", width + margin.left + margin.right)
   // .attr("height", height + margin.top + margin.bottom)
   // .append("g")
@@ -201,7 +201,6 @@ function simulation2() {
     document.getElementById('wrapper-container').offsetWidth -
     margin.left -
     margin.right; // Use the window's width
-  console.log(width)
   const height = window.innerHeight - document.getElementById('simulation2-container').clientHeight - document.getElementById('slider-container').clientHeight - 200;
 
 
