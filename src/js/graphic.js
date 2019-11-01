@@ -1,7 +1,7 @@
 /* global d3 */
 import { concat, each, fill, random, shuffle, slice } from 'lodash';
 import noUiSlider from 'nouislider';
-import { removeAllListeners } from 'cluster';
+import Reveal from './Reveal'
 
 function resize() { }
 
@@ -16,6 +16,8 @@ const textColor = '#5d5d5d';
 const bodyColor = '#7DCDD2';
 
 function init() {
+  simulation1();
+  simulation2();
   simulation3();
 }
 
