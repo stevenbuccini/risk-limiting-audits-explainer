@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang='en' data-version='1572445215055'>
+<html lang='en' data-version='1572575254295'>
 
 <head>
 
@@ -2312,48 +2312,59 @@ var e;function t(e){return(t="function"==typeof Symbol&&"symbol"==typeof Symbol.
 			</section>
 			
 			
-			<section>
-			  <p>Did you notice anything interesting? What happens if green wins in a landslide? Regardless of the margin of
-			    victory, <i>we always count the same number of votes</i> in a percentage-based audit. That's not very clever! When
-			    one side wins in a blow-out, election administrators are legally obligated to count every last ballot required by
-			    law. Imagine doing this for a large state, like the state of California. Even if blue won by 99%, California
-			    counties would have to audit 1% of the total ballots cast -- that’s over 130,000 ballots to examine by hand if we
-			    use 2016 turnout numbers (13.7 million ballots cast).
-			  </p>
+			<section id="current-affairs-recap" class="center"
+			  data-background="assets/images/slide_backgrounds/slide4.png">
+			  <div class="slide-content">
+			    <p>Did you notice anything interesting? What happens if green wins in a landslide? Regardless of the margin of
+			      victory, <i>we always count the same number of votes</i> in a percentage-based audit. That's not very clever! When
+			      one side wins in a blow-out, election administrators are legally obligated to count every last ballot required by
+			      law. Imagine doing this for a large state, like the state of California. Even if blue won by 99%, California
+			      counties would have to audit 1% of the total ballots cast -- that’s over 130,000 ballots to examine by hand if we
+			      use 2016 turnout numbers (13.7 million ballots cast).
+			    </p>
+			  </div>
 			</section>
-			<section id="risk-limiting-audits-intro" class="prose">
-			  <h2>Working smarter, not harder</h2>
-			  <p>It turns out when manually examine at a ballot, it tells you more than just which column to add a vote to. The
-			    <i>sequence</i> of votes is also important. Remember the old adage, "two steps forward, one step back"? We can use a
-			    similar intuition here.</p>
+			<section id="risk-limiting-audits-intro" class="center"
+			  data-background="assets/images/slide_backgrounds/slide6.png">
+			  <div class="slide-content">
+			    <h2>Working smarter, not harder</h2>
+			    <p>It turns out when manually examine at a ballot, it tells you more than just which column to add a vote to. The
+			      <i>sequence</i> of votes is also important. Remember the old adage, "two steps forward, one step back"? We can use
+			      a
+			      similar intuition here.</p>
 			
-			  <p>Professor Phillip Stark at the University of California, Berkeley applied fancy mathematics to this problem in
-			    order to audit ballots as efficiently as possible. He called this technique a "risk-limiting" audit. There are
-			    several different types of risk-limiting audits. While they differ in the ways that they go about selecting the
-			    ballots to be examined, each method provides a similar guarantee, backed by statistics, in the result of the
-			    election.</p>
+			    <p>Professor Phillip Stark at the University of California, Berkeley applied fancy mathematics to this problem in
+			      order to audit ballots as efficiently as possible. He called this technique a "risk-limiting" audit. There are
+			      several different types of risk-limiting audits. While they differ in the ways that they go about selecting the
+			      ballots to be examined, each method provides a similar guarantee, backed by statistics, in the result of the
+			      election.</p>
+			  </div>
 			</section>
 			
-			<section>
-			  <p>The type of risk-limiting audit we will look at today is called a <i>ballot-polling audit</i>. The basic procedure,
-			    heavily simplified, looks as follows:
-			  </p>
+			<section class="center" data-background="assets/images/slide_backgrounds/slide7.png">
+			  <div class="slide-content">
+			    <p>The type of risk-limiting audit we will look at today is called a <i>ballot-polling audit</i>. The basic
+			      procedure,
+			      heavily simplified, looks as follows:
+			    </p>
 			
-			  <ol>
-			    <li>Start a tally at 1</li>
-			    <li>Randomly select a ballot out of all the ballots cast.</li>
-			    <li>If the ballot contains a vote is for the supposed winner, multiply your total by some positive amount. Else,
-			      multiply by some fractional amount.</li>
-			    <li>Place the ballot back into the vote pool.</li>
-			    <li>Repeat steps 2 and 3 until you reach a threshold.</li>
-			  </ol>
+			    <ol>
+			      <li>Start a tally at 1</li>
+			      <li>Randomly select a ballot out of all the ballots cast.</li>
+			      <li>If the ballot contains a vote is for the supposed winner, multiply your total by some positive amount. Else,
+			        multiply by some fractional amount.</li>
+			      <li>Place the ballot back into the vote pool.</li>
+			      <li>Repeat steps 2 and 3 until you reach a threshold.</li>
+			    </ol>
 			
-			  <p>Next, we'll look at a heavily simplified election. 100 votes were cast, 10 at each polling place. Green won with an
-			    80% of the
-			    vote and we had to manually examine<span id='rla-audit-count'></span> ballots before we gained the stastical
-			    confidnece in the result to stop. Use the slider below to step through each examined ballot step by step. The line
-			    graph at the bottom shows our "confidence" in the result. Notice how it ebbs and flows over time depending on the
-			    vote being examined and the given sequence.</p>
+			    <p>Next, we'll look at a heavily simplified election. 100 votes were cast, 10 at each polling place. Green won with
+			      an
+			      80% of the
+			      vote and we had to manually examine<span id='rla-audit-count'></span> ballots before we gained the stastical
+			      confidnece in the result to stop. Use the slider below to step through each examined ballot step by step. The line
+			      graph at the bottom shows our "confidence" in the result. Notice how it ebbs and flows over time depending on the
+			      vote being examined and the given sequence.</p>
+			  </div>
 			</section>
 			
 			
@@ -2425,19 +2436,26 @@ var e;function t(e){return(t="function"==typeof Symbol&&"symbol"==typeof Symbol.
 			
 			</section>
 			
-			<section>
-			  <p>A couple quick things to point out here. The first is that we use multiplication as it allows us to "accelerate"
-			    our progress as we gain confidence. Another is that we can look at the same ballot more than once. This is pretty
-			    counterintuitive! Why would we need to verify something if we’ve already manually double-checked it? The answer is
-			    that we want to treat every ballot the exact same. Removing some ballots means it gets slightly more likely that we
-			    pick a new ballot each time, which could bias our results.</p>
+			<section class="center" data-background="assets/images/slide_backgrounds/slide9.png">
+			  <div class="slide-content">
+			    <p>A couple quick things to point out here. The first is that we use multiplication as it allows us to "accelerate"
+			      our progress as we gain confidence. Another is that we can look at the same ballot more than once. This is pretty
+			      counterintuitive! Why would we need to verify something if we’ve already manually double-checked it? The answer is
+			      that we want to treat every ballot the exact same. Removing some ballots means it gets slightly more likely that
+			      we
+			      pick a new ballot each time, which could bias our results.</p>
+			  </div>
 			</section>
-			<section id="simulation3" class="prose">
-			  <h2>The Power of RLAs</h2>
-			  <p>Now that we’ve seen how each type of audit is conducted, it’s time to put them to the test. Here is where we’ll see
-			    the real power of risk-limiting audits. You’ll have three sliders at your disposal: the ability to determine the
-			    total number of votes cast, the margin of victory, and the percentage of votes to check for the traditional type of
-			    audit. Play around with the sliders. Do you notice anything interesting?</p>
+			<section id="simulation3" class="center" data-background="assets/images/slide_backgrounds/slide10.png">
+			  <div class="slide-content">
+			    <h2>The Power of RLAs</h2>
+			    <p>Now that we’ve seen how each type of audit is conducted, it’s time to put them to the test. Here is where we’ll
+			      see
+			      the real power of risk-limiting audits. You’ll have three sliders at your disposal: the ability to determine the
+			      total number of votes cast, the margin of victory, and the percentage of votes to check for the traditional type
+			      of
+			      audit. Play around with the sliders. Do you notice anything interesting?</p>
+			  </div>
 			</section>
 			
 			<section>
@@ -2509,7 +2527,7 @@ var e;function t(e){return(t="function"==typeof Symbol&&"symbol"==typeof Symbol.
 	</main>
 
 	<script src='assets/scripts/d3.v5.11.0.min.js'></script>
-	<script src='main.js?version=1572445215055' async></script>
+	<script src='main.js?version=1572575254295' async></script>
 
 	<script>
 		// More info about config & dependencies:
