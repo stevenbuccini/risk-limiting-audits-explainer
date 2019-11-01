@@ -85,6 +85,10 @@
 				minScale: 1,
 				maxScale: 1,
 				center: false,
+				// Hack to get all the simulations to load
+				// immediately so they can calculate sizes for
+				// rendering SVGs
+				viewDistance: 10,
 			});
 		})()
 	</script>
