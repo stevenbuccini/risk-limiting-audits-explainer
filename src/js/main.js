@@ -45,19 +45,8 @@ function init() {
     // Manually refire render to get height calculations to work
     if (event.indexh === 7) {
       graphic.simulation2();
-    }
-    if (event.indexh >= 1) {
-      Reveal.configure({
-        // Vertical centering of slides
-        // Set back to true after title slide
-        center: true,
-      });
-    } else {
-      Reveal.configure({
-        // Vertical centering of slides
-        // Set back to true after title slide
-        center: false,
-      });
+    } else if (event.indexh === 3) {
+      graphic.simulation1();
     }
   });
   // setup sticky header menu

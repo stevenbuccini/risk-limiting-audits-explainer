@@ -16,8 +16,6 @@ const textColor = '#5d5d5d';
 const bodyColor = '#7DCDD2';
 
 function init() {
-  simulation1();
-  simulation2();
   simulation3();
 }
 
@@ -167,40 +165,6 @@ function simulation2() {
     runningTotal.push({ auditedVoteIndex: index, color: vote, total });
   }
 
-  // Try to use this when finished: https://bl.ocks.org/gordlea/27370d1eea8464b04538e6d8ced39e89
-  const n = runningTotal.length;
-  const margin = { top: 50, right: 50, bottom: 50, left: 50 };
-
-  const width =
-    document.getElementById('running-total-container').offsetWidth -
-    margin.left -
-    margin.right; // Use the window's width
-  const height = window.innerHeight - document.getElementById('simulation2-container').clientHeight - document.getElementById('slider-container').clientHeight - 200;
-
-  const xScale = d3
-    .scaleLinear()
-    .domain([1, n]) // input
-    .range([0, width]); // output
-
-  const yScale = d3
-    .scaleLinear()
-    .domain([0, 12]) // input
-    .range([height, 0]); // output
-
-  const line = d3
-    .line()
-    .x(function (d, i) {
-      return xScale(i + 1);
-    }) // set the x values for the line generator
-    .y(function (d) {
-      return yScale(d.y);
-    }) // set the y values for the line generator
-    .curve(d3.curveMonotoneX); // apply smoothing to the line
-
-  const dataset = d3.range(runningTotal.length).map(function (d) {
-    return { color: runningTotal[d].color, y: runningTotal[d].total };
-  });
-
   const slider = document.getElementById('simulation2-stepper');
 
   function filterPips(value, type) {
@@ -226,6 +190,42 @@ function simulation2() {
     });
   }
 
+
+  // Try to use this when finished: https://bl.ocks.org/gordlea/27370d1eea8464b04538e6d8ced39e89
+  const n = runningTotal.length;
+  const margin = { top: 50, right: 50, bottom: 50, left: 50 };
+
+  const width =
+    document.getElementById('running-total-container').offsetWidth -
+    margin.left -
+    margin.right; // Use the window's width
+  const height = window.innerHeight - document.getElementById('simulation2-container').clientHeight - document.getElementById('slider-container').clientHeight - 200;
+
+  console.log('render 2', height)
+
+  const xScale = d3
+    .scaleLinear()
+    .domain([1, n]) // input
+    .range([0, width]); // output
+
+  const yScale = d3
+    .scaleLinear()
+    .domain([0, 12]) // input
+    .range([height, 0]); // output
+
+  const line = d3
+    .line()
+    .x(function (d, i) {
+      return xScale(i + 1);
+    }) // set the x values for the line generator
+    .y(function (d) {
+      return yScale(d.y);
+    }) // set the y values for the line generator
+    .curve(d3.curveMonotoneX); // apply smoothing to the line
+
+  const dataset = d3.range(runningTotal.length).map(function (d) {
+    return { color: runningTotal[d].color, y: runningTotal[d].total };
+  });
 
 
   d3.select('#running-total-container > svg').remove();
@@ -291,6 +291,7 @@ function simulation2() {
 
   let path;
   function renderUpToStep(idx) {
+    console.log('stepped')
     // clear previous line segments and circles
     if (path) path.remove();
     d3.selectAll('.dot').remove();
@@ -320,6 +321,9 @@ function simulation2() {
     each(slice(dataset, 0, idx), (val, idx) => {
       manipulatedData[idx] = val;
     });
+
+    console.log(path)
+
     path = svg
       .append('path')
       .datum(slice(dataset, 0, idx)) // 10. Binds data to the line
@@ -483,4 +487,4 @@ function simulation3() {
     document.getElementById('rla-number').textContent = count.toString();
   }
 }
-export default { init, resize, simulation2 };
+export default { init, resize, simulation1, simulation2 };
