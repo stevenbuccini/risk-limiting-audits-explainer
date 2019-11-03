@@ -40,15 +40,14 @@ function init() {
     debounce(resize, 150);
   });
 
-  // Reveal.addEventListener('slidechanged', function (event) {
-  //   // event.previousSlide, event.currentSlide, event.indexh, event.indexv
-  //   // Manually refire render to get height calculations to work
-  //   if (event.indexh === 7) {
-  //     graphic.simulation2();
-  //   } else if (event.indexh === 3) {
-  //     graphic.simulation1();
-  //   }
-  // });
+  Reveal.addEventListener('slidechanged', function (event) {
+    // event.previousSlide, event.currentSlide, event.indexh, event.indexv
+    // // Manually refire render to get height calculations to work
+    // if (event.indexh === 3) {
+    //   console.log('triggered');
+    //   graphic.simulation1();
+    // }
+  });
   // setup sticky header menu
   // setupStickyHeader();
   // kick off graphic code

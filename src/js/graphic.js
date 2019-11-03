@@ -23,7 +23,13 @@ function init() {
 
 function simulation1() {
   const scale = 10;
-  const root = d3.select('#simulation1-svg');
+  const height = window.innerHeight - document.getElementById('current-audit-simulation').clientHeight - 50;
+  console.log('height', height)
+  const root = d3.select('#simulation1-container')
+    .append('svg')
+    .attr("viewBox", "0 0 100 100")
+    .classed("svg-content", true)
+    .style("height", height);
   // .attr("width", width + margin.left + margin.right)
   // .attr("height", height + margin.top + margin.bottom)
   // .append("g")
