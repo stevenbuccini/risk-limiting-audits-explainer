@@ -26,14 +26,15 @@ function simulation1() {
   const height = window.innerHeight - document.getElementById('current-audit-simulation').clientHeight - 100;
   console.log('height', height)
   const root = d3.select('#simulation1-container')
+    .html(null)
     .append('svg')
     .attr("viewBox", "0 0 100 100")
     .classed("svg-content", true)
-    .style("height", height);
+    .style("height", `${height}px`);
   // .attr("width", width + margin.left + margin.right)
   // .attr("height", height + margin.top + margin.bottom)
   // .append("g")
-  // .attr("transform", `translate(${margin.left}, ${margin.top})`);
+  // .attr("transform", `translate(${ margin.left }, ${ margin.top })`);
 
   const min = 50;
   const max = 62;
@@ -76,7 +77,7 @@ function simulation1() {
         .attr('transform', `translate(${x * scale}, ${y * scale})`)
         .attr('width', scale)
         .attr('height', scale)
-        .attr('fill', `${x * 10 + y <= numParty1 ? party1Color : party2Color}`)
+        .attr('fill', `${x * 10 + y <= numParty1 ? party1Color : party2Color} `)
         .attr('stroke', highlightColor)
         .attr('stroke-width', '1.5');
     });
@@ -160,13 +161,13 @@ function simulation2() {
   votes = shuffle(votes);
   const precinctTallies = [];
   for (let x = 0; x < 10; x++) {
-    const precinct = { name: `Precinct ${x + 1}` };
+    const precinct = { name: `Precinct ${x + 1} ` };
     precinct.votes = slice(votes, x * 10, x * 10 + 10);
     precinctTallies.push(precinct);
   }
 
   for (let x = 0; x < 10; x++) {
-    const root = d3.select(`#precinct${x + 1}`);
+    const root = d3.select(`#precinct${x + 1} `);
     for (let y = 0; y < 10; y++) {
       root
         .append('rect')
@@ -276,7 +277,7 @@ function simulation2() {
   svg
     .append('g')
     .attr('class', 'x axis')
-    .attr('transform', `translate(0,${height})`)
+    .attr('transform', `translate(0, ${height})`)
     .call(
       d3
         .axisBottom(xScale)
@@ -287,8 +288,8 @@ function simulation2() {
 
   svg
     .append('text')
-    .attr('x', `${width / 2}`)
-    .attr('y', `${height + 50}`)
+    .attr('x', `${width / 2} `)
+    .attr('y', `${height + 50} `)
     .style('text-anchor', 'middle')
     .text('Number of ballots audited');
 
@@ -300,7 +301,7 @@ function simulation2() {
   svg
     .append('text')
     .attr('transform', 'rotate(-90)')
-    .attr('x', `${0 - height / 2}`)
+    .attr('x', `${0 - height / 2} `)
     .style('text-anchor', 'middle')
     .attr('dy', '-1.5em')
     .text('Score');
@@ -318,7 +319,7 @@ function simulation2() {
 
   // svg
   //   .append('g')
-  //   .attr('transform', `translate(0, ${yScale(0.011)})`)
+  //   .attr('transform', `translate(0, ${ yScale(0.011) })`)
   //   .append('line')
   //   .attr('x2', width)
   //   .style('stroke', highlightColor)
@@ -335,7 +336,7 @@ function simulation2() {
     for (let i = 0; i < idx; i++) {
       const vote = runningTotal[i];
       const root = d3.select(
-        `#precinct${Math.floor(vote.auditedVoteIndex / 10) + 1}`
+        `#precinct${Math.floor(vote.auditedVoteIndex / 10) + 1} `
       );
       root
         .append('rect')
@@ -446,9 +447,11 @@ function simulation3() {
   });
 
   marginVictorySlider.noUiSlider.on('set', () => {
-    document.getElementById('margin-victory-num').textContent = `${Math.floor(
-      marginVictorySlider.noUiSlider.get()
-    ).toString()}%`;
+    document.getElementById('margin-victory-num').textContent = `${
+      Math.floor(
+        marginVictorySlider.noUiSlider.get()
+      ).toString()
+      }% `;
     updateAuditTotals();
   });
 
@@ -471,9 +474,11 @@ function simulation3() {
   });
 
   traditionalAuditSlider.noUiSlider.on('set', () => {
-    document.getElementById('audit-percent-num').textContent = `${Math.floor(
-      traditionalAuditSlider.noUiSlider.get()
-    ).toString()}%`;
+    document.getElementById('audit-percent-num').textContent = `${
+      Math.floor(
+        traditionalAuditSlider.noUiSlider.get()
+      ).toString()
+      }% `;
 
     updateAuditTotals();
   });
