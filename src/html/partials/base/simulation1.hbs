@@ -23,16 +23,16 @@
     <div id="simulation1-container"></div>
 
     {{!--  replace with  noUIslider import noUiSlider from 'nouislider' --}}
-    <div id=" simulation1-controls">
-      <label for="vote-percentage">
-        blue % of vote: = <span id="vote-percentage-value">…</span>
-      </label>
-      <input type="range" min="0" max="100" id="vote-percentage">
-      <br>
-      <label for="audit-percentage">
-        % of ballots to audit: = <span id="audit-percentage-value">…</span>
-      </label>
-      <input type="range" min="0" max="100" id="audit-percentage">
+    <div id="simulation1-controls">
+      <div class="sim1-slider-container">
+        <label for="vote-percentage">Green's vote percentage:&nbsp;<span id="vote-percentage-value"></span>%</label>
+        <div id="vote-percentage"></div>
+      </div>
+
+      <div class="sim1-slider-container">
+        <label for="audit-percentage">Percent of votes to audit:&nbsp;<span id="audit-percentage-value"></span>%</label>
+        <div id="audit-percentage"></div>
+      </div>
     </div>
   </div>
 

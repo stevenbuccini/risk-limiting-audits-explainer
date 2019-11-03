@@ -23,7 +23,7 @@ function init() {
 
 function simulation1() {
   const scale = 10;
-  const height = window.innerHeight - document.getElementById('current-audit-simulation').clientHeight - 50;
+  const height = window.innerHeight - document.getElementById('current-audit-simulation').clientHeight - 100;
   console.log('height', height)
   const root = d3.select('#simulation1-container')
     .append('svg')
@@ -82,11 +82,51 @@ function simulation1() {
     });
   }
 
+  const slider1 = document.getElementById('vote-percentage');
+  const slider2 = document.getElementById('audit-percentage');
+
+  if (slider1.noUiSlider === undefined) {
+    noUiSlider.create(slider1, {
+      pips: {
+        mode: 'range',
+        density: 5,
+      },
+      range: {
+        min: [0],
+        max: [100],
+      },
+      start: numParty1,
+      step: 1,
+      padding: 20,
+    });
+    slider1.noUiSlider.on('slide', () => {
+      updateWinPercentage(Math.floor(slider1.noUiSlider.get()));
+    });
+  };
+
+  if (slider2.noUiSlider === undefined) {
+    noUiSlider.create(slider2, {
+      pips: {
+        mode: 'range',
+        density: 5,
+      },
+      range: {
+        min: [0],
+        max: [100],
+      },
+      start: 0,
+      step: 1,
+    });
+    slider2.noUiSlider.on('slide', () => {
+      updateAuditPercentage(Math.floor(slider2.noUiSlider.get()));
+    });
+  }
+
+
   // update the elements
   function updateWinPercentage(newPercentage) {
     // adjust the text on the range slider
     d3.select('#vote-percentage-value').text(newPercentage);
-    d3.select('#vote-percentage').property('value', newPercentage);
     numParty1 = newPercentage;
 
     // update the rircle radius
@@ -97,20 +137,10 @@ function simulation1() {
   function updateAuditPercentage(newPercentage) {
     // adjust the text on the range slider
     d3.select('#audit-percentage-value').text(newPercentage);
-    d3.select('#audit-percentage').property('value', newPercentage);
     auditPercentage = newPercentage;
-    // update the rircle radius
     drawGrid(numParty1, newPercentage);
   }
-
-  d3.select('#vote-percentage').on('input', function () {
-    updateWinPercentage(+this.value);
-  });
   updateWinPercentage(numParty1);
-
-  d3.select('#audit-percentage').on('input', function () {
-    updateAuditPercentage(+this.value);
-  });
   updateAuditPercentage(auditPercentage);
 
   drawGrid(numParty1, auditPercentage);
