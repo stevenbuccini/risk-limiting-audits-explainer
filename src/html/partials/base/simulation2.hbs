@@ -2,49 +2,127 @@
   data-background="{{basepath}}assets/images/slide_backgrounds/slide6.png">
   <div class="slide-content">
     <h2>Working smarter, not harder</h2>
-    <p>It turns out when manually examine at a ballot, it tells you more than just which column to add a vote to. The
-      <i>sequence</i> of votes is also important. Remember the old adage, "two steps forward, one step back"? We can use
-      a
-      similar intuition here.</p>
+    <p>Several years ago, Professor Phillip Stark at the University of California, Berkeley came up with a new method to
+      achieve a higher level of statistical confidence in election results while counting significantly fewer ballots.
+      This technique is called a “risk-limiting audit,” and election security experts consider it to be the gold
+      standard.</p>
 
-    <p>Professor Phillip Stark at the University of California, Berkeley applied fancy mathematics to this problem in
-      order to audit ballots as efficiently as possible. He called this technique a "risk-limiting" audit. There are
-      several different types of risk-limiting audits. While they differ in the ways that they go about selecting the
-      ballots to be examined, each method provides a similar guarantee, backed by statistics, in the result of the
-      election.</p>
-  </div>
-</section>
-
-<section class="center" data-background="{{basepath}}assets/images/slide_backgrounds/slide7.png">
-  <div class="slide-content">
-    <p>The type of risk-limiting audit we will look at today is called a <i>ballot-polling audit</i>. The basic
-      procedure,
-      heavily simplified, looks as follows:
+    <p>
+      There are several different types of risk-limiting audits. They differ primarily in how they are carried out, but
+      all offer the same strong statistical guarantee in the result. These guarantees are provided by something called
+      the <a href="https://en.wikipedia.org/wiki/Sequential_probability_ratio_test">sequential probability ratio
+        test</a> (SPRT).
     </p>
 
-    <ol>
-      <li>Start a tally at 1</li>
-      <li>Randomly select a ballot out of all the ballots cast.</li>
-      <li>If the ballot contains a vote is for the supposed winner, multiply your total by some positive amount. Else,
-        multiply by some fractional amount.</li>
-      <li>Place the ballot back into the vote pool.</li>
-      <li>Repeat steps 2 and 3 until you reach a threshold.</li>
-    </ol>
 
-    <p>Next, we'll look at a heavily simplified election. 100 votes were cast, 10 at each polling place. Green won with
-      an
-      80% of the
-      vote and we had to manually examine<span id='rla-audit-count'></span> ballots before we gained the stastical
-      confidnece in the result to stop. Use the slider below to step through each examined ballot step by step. The line
-      graph at the bottom shows our "confidence" in the result. Notice how it ebbs and flows over time depending on the
-      vote being examined and the given sequence.</p>
+    <p>
+      First, we have what is called a <i>null hypothesis</i>: we assume that the initial count is correct. The
+      <i>alternative
+        hypothesis</i> is the opposite assumption —that for whatever reason (dust in the scanner lens, voter error,
+      Russian
+      interference), the initial reported count is incorrect.
+    </p>
+
+    <p>
+      Next, we begin randomly choosing and examining data points. In our case, these are the hand-marked paper ballots
+      cast during the election. Each ballot that we examine that lists the supposed winner gives us <i>more
+        confidence</i> in
+      the
+      initial result; in other words, it favors the null hypothesis. Likewise, each ballot we see that was cast for the
+      loser dampens our confidence; it favors the alternative hypothesis.
+    </p>
+
+    <p>
+      Think of this like the old adage, “two steps forward, one step back”. We might not <i>always</i> take a sample
+      that gives
+      us confidence, but on the balance, the totality of samples will give us more confidence in our initial result than
+      not, assuming the initial result is, in fact, correct.
+    </p>
   </div>
 </section>
 
+<section class="center" id="audit-stopping-conditions">
+  <div class="slide-content">
+    <p>
+      So how do we know when to stop collecting samples? We want to do so at the point when we are confident that the
+      supposed winner is the correct one. (We can never be 100 percent sure, of course.) Here, we use a value called the
+      risk-limit, which is just the error rate you are willing to tolerate. For example, a risk-limit of 10% means there
+      is
+      a 90% chance that the audit will detect an error in the results, if one exists. You can tune this value to your
+      liking
+      based on your risk profile and resource constraints.
+    </p>
 
-<section>
+    <p>
+      The margin of victory will also determine how many ballots we need to count. If the margin of victory is greater,
+      then
+      it would be harder for any individual ballot to affect the results, so we can start with more confidence in the
+      outcome. The sequential probability ratio test takes into account both confidence in the result and margin of
+      victory
+      when it calculates how many ballots to count.
+    </p>
+  </div>
+</section>
+
+<section class="center" id="sampling-with-replacement">
+  <div class="slide-content">
+    <p>
+      One last thing about a risk-limiting audit that is somewhat strange is the concept of sampling with replacement.
+      After you check every ballot, you put it back in exactly the same spot before choosing another ballot. This means
+      that you may choose the same ballot more than once! Why would we do this? We already know that a ballot is
+      accurate
+      once we’ve checked it, there shouldn’t be any need to check it again!
+    </p>
+
+    <p>
+      Well, if we were to remove the ballot once we’ve checked it, we would establish a relationship between our
+      samples.
+      Simply picking one ballot changes the probabilities of selecting all the other ballots, and changing these
+      probabilities mucks with the assumptions of the SPRT.
+    </p>
+
+    <p>
+      Remember, we are most concerned with the percentage of votes cast for the supposed winner, not the winner
+      themselves. Have you ever been at the pool when the lifeguards check the chlorine levels? They use a small vial,
+      no
+      matter if it’s a neighborhood pool or a giant, Olympic-sized one. This is because the amount of water in the pool
+      isn’t important, but rather the percentage of chlorine. This is the same concept behind putting the ballots back
+      after we’ve checked them.
+    </p>
+  </div>
+</section>
+
+<section class="center" id="rla-types" data-background="{{basepath}}assets/images/slide_backgrounds/slide7.png">
+  <div class="slide-content">
+    <p>
+      Now let’s look at the actual steps required to conduct a risk-limiting audit. There are several different types of
+      risk-limiting audits. The differences between the methods mainly concern how samples are collected. The method a
+      given election administrator chooses is largely dependent on the voting equipment they use. Different voting
+      systems have different capabilities for identifying and storing individual ballots, which is critical in the
+      risk-limiting audit math because it affects our ability to ensure we can sample with replacement.
+    </p>
+
+    <p>
+      The method we will examine today is called “ballot polling.” This means we can select any ballot for examination,
+      regardless of where or how it was cast.
+    </p>
+  </div>
+
+</section>
+
+<section id="rla-simulation">
   <div id="wrapper-container" class="simulation-content">
     <div id="slider-container">
+      <p>
+        Below is a heavily simplified election. We want to illustrate the process of conducting a risk-limiting audit,
+        so
+        we’ve fixed the values so you can focus on the steps. In this election, 100 votes were cast, 10 at each polling
+        place. Green won the election with 80% of the vote and the recorded votes reflect this reality. We also fix a
+        risk
+        limit of 10%. The slider below represents how many votes we’ve counted during our audit. Move the slider to walk
+        through the audit step by step. You’ll see how every ballot we examine changes our confidence level, and you can
+        see how many ballots it takes to reach the appropriate confidence threshold.
+      </p>
       <label for="simulation2-stepper">Number of votes audited:</label>
       <div id="simulation2-stepper"></div>
     </div>

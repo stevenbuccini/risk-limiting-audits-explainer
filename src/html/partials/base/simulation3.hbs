@@ -1,16 +1,13 @@
-<section id="simulation3" class="center" data-background="{{basepath}}assets/images/slide_backgrounds/slide10.png">
+<section id="rla-comparison" class="center">
   <div class="slide-content">
     <h2>The Power of RLAs</h2>
-    <p>Now that we’ve seen how each type of audit is conducted, it’s time to put them to the test. Here is where we’ll
-      see
-      the real power of risk-limiting audits. You’ll have three sliders at your disposal: the ability to determine the
-      total number of votes cast, the margin of victory, and the percentage of votes to check for the traditional type
-      of
-      audit. Play around with the sliders. Do you notice anything interesting?</p>
+    <p>Now that we’ve seen how different types of audit are conducted, it’s time to put them to the test. Here we’ll see
+      the real power of risk-limiting audits. You’ll have three sliders at your disposal, giving you the ability to set
+      the total number of votes cast, the margin of victory, and the percentage of votes to check for the traditional
+      type of audit. Play around with the sliders. Do you notice anything interesting?
+      ?</p>
   </div>
-</section>
 
-<section>
   <div id="simulation-control">
     <label for="ballots-cast-slider">
       Number of ballots cast: <span id="ballots-cast-num">100</span>
@@ -36,14 +33,29 @@
     <h2>Number of ballots audited by RLAs: <span id="rla-number"></span></h2>
   </div>
 
-  <p>
-    Now, try moving the total ballots cast slider to the end, 14 million. Now, move the margin of victory slider to 11%.
-    Finally, move the traditional audit percentage to 3. Congratulations! This represents the 2008 Presidential race in
-    California, where Barack Obama won 61% of the 13.7 million votes cast. A risk limiting audit would need to check
-    just 97 ballots to have 90% confidence that the given result is not wrong. Meanwhile, California law at the time
-    required significantly more ballots to check -- 137,000, or 1% of the 13,700,000 total ballots cast. WIth
-    significantly fewer ballots to check, election officials can spend their resources auditing other races further down
-    the ballot and upgrading voting equipment.
-  </p>
+  <div class="slide-content">
+    <p>
+      Now, try moving the “total ballots cast” slider to the end (14 million). Next, move the margin of victory slider
+      to 11%. Finally, move the traditional audit percentage to ‘3’. This represents the 2008 Presidential race in
+      California, where Barack Obama won 61% of the 13.7 million votes cast. A risk-limiting audit would need to check
+      just 97 ballots to have confidence in the result (90%!). Meanwhile, the current law would have required checking
+      significantly more ballots.
 
+    </p>
+  </div>
+</section>
+
+<section class="center" id="rla-analysis" data-background="{{basepath}}assets/images/slide_backgrounds/slide10.png">
+  <div class="slide-content">
+    <p>
+      How is this possible? The sequential probability ratio test is our secret weapon. As we saw before, with a
+      traditional
+      audit, we always count the same number of ballots. With SPRT, the greater the margin of victory, the fewer ballots
+      we
+      have to count to achieve a similar level of confidence in the result. <b>This is the true power of risk-limiting
+        audits.</b> With significantly fewer ballots to check, election officials can spend their resources auditing
+      other
+      races farther down the ballot and upgrading voting equipment.
+    </p>
+  </div>
 </section>
