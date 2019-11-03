@@ -97,7 +97,6 @@ function simulation1() {
       },
       start: numParty1,
       step: 1,
-      padding: 20,
     });
     slider1.noUiSlider.on('slide', () => {
       updateWinPercentage(Math.floor(slider1.noUiSlider.get()));
