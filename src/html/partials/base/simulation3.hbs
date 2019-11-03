@@ -1,5 +1,5 @@
 <section id="rla-comparison" class="center">
-  <div class="slide-content">
+  <div class="slide-text-content">
     <h2>The Power of RLAs</h2>
     <p>Now that we’ve seen how different types of audit are conducted, it’s time to put them to the test. Here we’ll see
       the real power of risk-limiting audits. You’ll have three sliders at your disposal, giving you the ability to set
@@ -8,32 +8,38 @@
       ?</p>
   </div>
 
-  <div id="simulation-control">
-    <label for="ballots-cast-slider">
-      Number of ballots cast: <span id="ballots-cast-num">100</span>
-    </label>
-    <div id="ballots-cast-slider" class="nouislider-custom"></div>
+  <div class="simulation-content">
+    <div id="simulation-control">
+      <label for="ballots-cast-slider">
+        Number of ballots cast: <span id="ballots-cast-num">100</span>
+      </label>
+      <div id="ballots-cast-slider" class="nouislider-custom"></div>
 
 
-    <label for="margin-of-victory">
-      Margin of victory: <span id="margin-victory-num">9%</span>
-    </label>
-    <div id="margin-of-victory" class="nouislider-custom"></div>
+      <label for="margin-of-victory">
+        Margin of victory: <span id="margin-victory-num">9%</span>
+      </label>
+      <div id="margin-of-victory" class="nouislider-custom"></div>
 
 
 
-    <label for="traditional-audit-percent">
-      Percentage of ballots to audit (traditional): <span id="audit-percent-num">3%</span>
-    </label>
-    <div id="traditional-audit-percent" class="nouislider-custom"></div>
+      <label for="traditional-audit-percent">
+        Percentage of ballots to audit (traditional): <span id="audit-percent-num">3%</span>
+      </label>
+      <div id="traditional-audit-percent" class="nouislider-custom"></div>
 
+    </div>
+
+    <div>
+      <h2 class="sim3-output">Number of ballots audited by traditional, fixed-percentage audit: <span
+          id="traditional-number"></span></h2>
+      <h2 class="sim3-output">Number of ballots audited by RLAs: <span id="rla-number"></span></h2>
+    </div>
   </div>
-  <div>
-    <h2>Number of ballots audited by traditional, fixed-percentage audit: <span id="traditional-number"></span></h2>
-    <h2>Number of ballots audited by RLAs: <span id="rla-number"></span></h2>
-  </div>
 
-  <div class="slide-content">
+
+
+  <div class="slide-text-content">
     <p>
       Now, try moving the “total ballots cast” slider to the end (14 million). Next, move the margin of victory slider
       to 11%. Finally, move the traditional audit percentage to ‘3’. This represents the 2008 Presidential race in
