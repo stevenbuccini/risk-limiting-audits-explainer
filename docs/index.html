@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang='en' data-version='1572577982971'>
+<html lang='en' data-version='1572812982243'>
 
 <head>
 
@@ -342,7 +342,7 @@ transform: translate(0, -50%);
 top: 50%;
 right: 120%;
 }
-.slider.noUi-target{box-shadow:none;border:none;background-color:transparent}.slider.noUi-horizontal{cursor:pointer;height:20px;background:transparent}.slider.noUi-horizontal .noUi-base{height:100%}.slider.noUi-horizontal .noUi-base:after{content:'';display:block;width:100%;height:2px;background:#282828;top:50%;position:absolute;border-radius:2px}.slider.noUi-horizontal .noUi-handle{outline:none;width:20px;height:20px;left:10px;top:0;border:2px solid #282828;background-color:#282828;border-radius:50%;box-shadow:none;cursor:pointer}.slider.noUi-horizontal .noUi-handle:before{display:none}.slider.noUi-horizontal .noUi-handle:after{display:none}.intro{position:fixed;top:0;left:0;text-align:left !important;padding:3rem 2rem 3rem 2rem;color:#47467a !important}.intro__hed{font-size:72px;font-weight:bolder}.intro__dek{max-width:60rem;font-size:36px;margin-top:2rem}.intro__byline{max-width:60rem;margin:0 auto;margin-top:2rem}.intro__byline a{color:#47467a !important;border-bottom:2px solid #47467a}.overflow{position:static}.slide-content{background-color:#fff;color:#47467a;font-family:'Work Sans',sans-serif;padding:25px}@media only screen and (min-width:50em){.slide-content{width:50%;margin:0 auto}}.slide-content h2{font-size:20px;font-family:'Chivo',sans-serif}.slide-content p{font-size:16px;text-align:left}.simulation-content{max-width:960px;max-height:700px;margin:0 auto;padding-left:50px;padding-right:50px}#simulation2-container{display:flex;flex-wrap:wrap}#simulation2-container .precinct-container{width:20%}#slider-container{margin-bottom:25px}
+.slider.noUi-target{box-shadow:none;border:none;background-color:transparent}.slider.noUi-horizontal{cursor:pointer;height:20px;background:transparent}.slider.noUi-horizontal .noUi-base{height:100%}.slider.noUi-horizontal .noUi-base:after{content:'';display:block;width:100%;height:2px;background:#282828;top:50%;position:absolute;border-radius:2px}.slider.noUi-horizontal .noUi-handle{outline:none;width:20px;height:20px;left:10px;top:0;border:2px solid #282828;background-color:#282828;border-radius:50%;box-shadow:none;cursor:pointer}.slider.noUi-horizontal .noUi-handle:before{display:none}.slider.noUi-horizontal .noUi-handle:after{display:none}.intro{position:fixed;top:0;left:0;text-align:left !important;padding:3rem 2rem 3rem 2rem;color:#47467a !important}.intro__hed{font-size:72px;font-weight:bolder}.intro__dek{max-width:60rem;font-size:36px;margin-top:2rem}.intro__byline{max-width:60rem;margin:0 auto;margin-top:2rem}.intro__byline a{color:#47467a !important;border-bottom:2px solid #47467a}.overflow{position:static}.slide-content{background-color:#fff;color:#47467a;font-family:'Work Sans',sans-serif;padding:25px}@media only screen and (min-width:50em){.slide-content{width:50%;margin:0 auto}}.slide-content h2{font-size:20px;font-family:'Chivo',sans-serif}.slide-content p{font-size:16px;text-align:left}.simulation-content{max-width:960px;max-height:700px;margin:0 auto;padding-left:50px;padding-right:50px}#simulation1-container{display:inline-block;width:100%}#simulation1-controls{display:flex;justify-content:space-between;margin-top:25px}.sim1-slider-container{width:45%;font-family:'Chivo',sans-serif}.noUi-target{margin-top:10px}#simulation2-container{display:flex;flex-wrap:wrap}#simulation2-container .precinct-container{width:20%}#slider-container{margin-bottom:25px;font-family:'Chivo',sans-serif}
 /*!
 * reveal.js
 * http://revealjs.com
@@ -2293,22 +2293,22 @@ var e;function t(e){return(t="function"==typeof Symbol&&"symbol"==typeof Symbol.
 			</section>
 			
 			<section id="current-audit-simulation">
-			  <div id="simulation1-container" class="stretch">
-			    <svg id="simulation1-svg" viewbox="0 0 100 100" style="background:white"></svg>
+			  <div class="simulation-content">
+			    <div id="simulation1-container"></div>
 			
 			    <div id="simulation1-controls">
-			      <label for="vote-percentage">
-			        blue % of vote: = <span id="vote-percentage-value">…</span>
-			      </label>
-			      <input type="range" min="0" max="100" id="vote-percentage">
-			      <br>
-			      <label for="audit-percentage">
-			        % of ballots to audit: = <span id="audit-percentage-value">…</span>
-			      </label>
-			      <input type="range" min="0" max="100" id="audit-percentage">
-			    </div>
+			      <div class="sim1-slider-container">
+			        <label for="vote-percentage">Green's vote percentage:&nbsp;<span id="vote-percentage-value"></span>%</label>
+			        <div id="vote-percentage"></div>
+			      </div>
 			
+			      <div class="sim1-slider-container">
+			        <label for="audit-percentage">Percent of votes to audit:&nbsp;<span id="audit-percentage-value"></span>%</label>
+			        <div id="audit-percentage"></div>
+			      </div>
+			    </div>
 			  </div>
+			
 			</section>
 			
 			
@@ -2496,39 +2496,41 @@ var e;function t(e){return(t="function"==typeof Symbol&&"symbol"==typeof Symbol.
 			  </p>
 			
 			</section>
-			<section id="outro">
-			  <h2>Conclusion</h2>
-			  <p>
-			    So, what have we learned? Here are some key takeaways:
-			  </p>
+			<section id="outro" class="center" data-background="assets/images/slide_backgrounds/outro.png">
+			  <div class="slide-content">
+			    <h2>Conclusion</h2>
+			    <p>
+			      So, what have we learned? Here are some key takeaways:
+			    </p>
 			
-			  <ul>
-			    <li>The procedure to conduct a ballot-polling risk-limiting audit is incredibly simple, as is the math behind it.
-			    </li>
-			    <li>Because we return ballots to the pool after we’ve checked them, the number of ballots we need to check depends
-			      on the margin of victory -- not the total number of ballots cast.</li>
-			    <li>Risk-limiting audits allow us to adjust the amount of risk we want to take for a given municipality’s risk
-			      profile and tolerance.</li>
-			  </ul>
+			    <ul>
+			      <li>The procedure to conduct a ballot-polling risk-limiting audit is incredibly simple, as is the math behind it.
+			      </li>
+			      <li>Because we return ballots to the pool after we’ve checked them, the number of ballots we need to check depends
+			        on the margin of victory -- not the total number of ballots cast.</li>
+			      <li>Risk-limiting audits allow us to adjust the amount of risk we want to take for a given municipality’s risk
+			        profile and tolerance.</li>
+			    </ul>
 			
-			  </p>
-			  We hope you’ve enjoyed this whirlwind tour of RLAs! But this page is just the beginning. There are many other great
-			  resources at your disposal, a sample of which are listed below:
-			  </p>
-			  <ul>
-			    <li><a href="https://www.stat.berkeley.edu/~stark/Preprints/gentle12.pdf">A Gentle Introduction to Risk-Limiting
-			        Audits</a></li>
-			    <li><a href="https://www.democracyfund.org/media/uploaded/2019_DF_KnowingItsRight_Part2.pdf">Risk-Limiting Audit
-			        Implementation Workbook</a></li>
-			    <li><a href="https://www.youtube.com/watch?v=gMbz0_dizoA">Making Every Vote Count: A Practical Guide to
-			        Risk-Limiting Audits</a></li>
-			  </ul>
+			    </p>
+			    We hope you’ve enjoyed this whirlwind tour of RLAs! But this page is just the beginning. There are many other great
+			    resources at your disposal, a sample of which are listed below:
+			    </p>
+			    <ul>
+			      <li><a href="https://www.stat.berkeley.edu/~stark/Preprints/gentle12.pdf">A Gentle Introduction to Risk-Limiting
+			          Audits</a></li>
+			      <li><a href="https://www.democracyfund.org/media/uploaded/2019_DF_KnowingItsRight_Part2.pdf">Risk-Limiting Audit
+			          Implementation Workbook</a></li>
+			      <li><a href="https://www.youtube.com/watch?v=gMbz0_dizoA">Making Every Vote Count: A Practical Guide to
+			          Risk-Limiting Audits</a></li>
+			    </ul>
+			  </div>
 			</section>
 		</div>
 	</main>
 
 	<script src='assets/scripts/d3.v5.11.0.min.js'></script>
-	<script src='main.js?version=1572577982971' async></script>
+	<script src='main.js?version=1572812982243' async></script>
 	<script>
 		// More info about config & dependencies:
 		// - https://github.com/hakimel/reveal.js#configuration
