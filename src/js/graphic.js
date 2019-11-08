@@ -1,9 +1,9 @@
 /* global d3 */
 import { concat, each, fill, random, shuffle, slice } from 'lodash';
 import noUiSlider from 'nouislider';
-import Reveal from './Reveal'
+import Reveal from './Reveal';
 
-function resize() { }
+function resize() {}
 
 // const margin = { top: 20, right: 10, bottom: 20, left: 10 };
 // const width = 640 - margin.left - margin.right;
@@ -23,14 +23,18 @@ function init() {
 
 function simulation1() {
   const scale = 10;
-  const height = window.innerHeight - document.getElementById('current-audit-simulation').clientHeight - 100;
-  console.log('height', height)
-  const root = d3.select('#simulation1-container')
+  const height =
+    window.innerHeight -
+    document.getElementById('current-audit-simulation').clientHeight -
+    100;
+  console.log('height', height);
+  const root = d3
+    .select('#simulation1-container')
     .html(null)
     .append('svg')
-    .attr("viewBox", "0 0 100 100")
-    .classed("svg-content", true)
-    .style("height", `${height}px`);
+    .attr('viewBox', '0 0 100 100')
+    .classed('svg-content', true)
+    .style('height', `${height}px`);
   // .attr("width", width + margin.left + margin.right)
   // .attr("height", height + margin.top + margin.bottom)
   // .append("g")
@@ -102,7 +106,7 @@ function simulation1() {
     slider1.noUiSlider.on('slide', () => {
       updateWinPercentage(Math.floor(slider1.noUiSlider.get()));
     });
-  };
+  }
 
   if (slider2.noUiSlider === undefined) {
     noUiSlider.create(slider2, {
@@ -121,7 +125,6 @@ function simulation1() {
       updateAuditPercentage(Math.floor(slider2.noUiSlider.get()));
     });
   }
-
 
   // update the elements
   function updateWinPercentage(newPercentage) {
@@ -228,7 +231,6 @@ function simulation2() {
     });
   }
 
-
   // Try to use this when finished: https://bl.ocks.org/gordlea/27370d1eea8464b04538e6d8ced39e89
   const n = runningTotal.length;
   const margin = { top: 50, right: 50, bottom: 50, left: 50 };
@@ -237,8 +239,11 @@ function simulation2() {
     document.getElementById('wrapper-container').offsetWidth -
     margin.left -
     margin.right; // Use the window's width
-  const height = window.innerHeight - document.getElementById('simulation2-container').clientHeight - document.getElementById('slider-container').clientHeight - 200;
-
+  const height =
+    window.innerHeight -
+    document.getElementById('simulation2-container').clientHeight -
+    document.getElementById('slider-container').clientHeight -
+    200;
 
   const xScale = d3
     .scaleLinear()
@@ -252,18 +257,17 @@ function simulation2() {
 
   const line = d3
     .line()
-    .x(function (d, i) {
+    .x(function(d, i) {
       return xScale(i + 1);
     }) // set the x values for the line generator
-    .y(function (d) {
+    .y(function(d) {
       return yScale(d.y);
     }) // set the y values for the line generator
     .curve(d3.curveMonotoneX); // apply smoothing to the line
 
-  const dataset = d3.range(runningTotal.length).map(function (d) {
+  const dataset = d3.range(runningTotal.length).map(function(d) {
     return { color: runningTotal[d].color, y: runningTotal[d].total };
   });
-
 
   d3.select('#running-total-container > svg').remove();
   const svg = d3
@@ -343,7 +347,7 @@ function simulation2() {
         .attr(
           'transform',
           `translate(${(vote.auditedVoteIndex % 10) * scale +
-          scale / 2}, ${scale / 2})`
+            scale / 2}, ${scale / 2})`
         )
         .attr('class', 'audited')
         .attr('width', scale)
@@ -358,7 +362,6 @@ function simulation2() {
       manipulatedData[idx] = val;
     });
 
-
     path = svg
       .append('path')
       .datum(slice(dataset, 0, idx)) // 10. Binds data to the line
@@ -372,14 +375,14 @@ function simulation2() {
       .enter()
       .append('circle') // Uses the enter().append() method
       .attr('class', 'dot') // Assign a class for styling
-      .attr('cx', function (d, i) {
+      .attr('cx', function(d, i) {
         return xScale(i + 1);
       })
-      .attr('cy', function (d) {
+      .attr('cy', function(d) {
         return yScale(d.y);
       })
       .attr('r', 10)
-      .attr('fill', function (d) {
+      .attr('fill', function(d) {
         return d.color;
       });
   }
@@ -447,11 +450,9 @@ function simulation3() {
   });
 
   marginVictorySlider.noUiSlider.on('set', () => {
-    document.getElementById('margin-victory-num').textContent = `${
-      Math.floor(
-        marginVictorySlider.noUiSlider.get()
-      ).toString()
-      }% `;
+    document.getElementById('margin-victory-num').textContent = `${Math.floor(
+      marginVictorySlider.noUiSlider.get()
+    ).toString()}% `;
     updateAuditTotals();
   });
 
@@ -474,11 +475,9 @@ function simulation3() {
   });
 
   traditionalAuditSlider.noUiSlider.on('set', () => {
-    document.getElementById('audit-percent-num').textContent = `${
-      Math.floor(
-        traditionalAuditSlider.noUiSlider.get()
-      ).toString()
-      }% `;
+    document.getElementById('audit-percent-num').textContent = `${Math.floor(
+      traditionalAuditSlider.noUiSlider.get()
+    ).toString()}% `;
 
     updateAuditTotals();
   });
